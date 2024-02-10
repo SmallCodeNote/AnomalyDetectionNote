@@ -39,7 +39,8 @@ namespace AnomalyDetectionNote
 
 
             trackBarLabel_Threshold = new TrackBarWithValue(groupBox_Threshold);
-            trackBarLabel_Threshold.valueFactor = 0.1;
+            trackBarLabel_Threshold.valueFactor = 0.02;
+            trackBarLabel_Threshold.Maximum = 1;
             trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
             trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
 
