@@ -113,12 +113,12 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) PreviewParameter_TrainFileArrayIndex++;
-            //string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
-
+            
 
             TrainChartUpdate();
 
 
+            //Button Enabled Upadate
             if (PreviewParameter_TrainFileArrayIndex > 0) { button_PreviewParameter_TrainPrev.Enabled = true; }
             if (PreviewParameter_TrainFileArrayIndex >= PreviewParameter_TrainFileArray.Length - 1)
             {
@@ -130,13 +130,12 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             PreviewParameter_TrainFileArrayIndex--;
-            //string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
-
+            
 
             TrainChartUpdate();
 
 
-            //Button Update
+            //Button Enabled Upadate
             if (PreviewParameter_TrainFileArrayIndex <= 0) { button_PreviewParameter_TrainPrev.Enabled = false; }
             if (PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) { button_PreviewParameter_TrainNext.Enabled = true; }
 
@@ -146,13 +145,12 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) PreviewParameter_PredictFileArrayIndex++;
-            //string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
-
+            
 
             PredictChartUpdate();
 
 
-            //Button Update
+            //Button Enabled Upadate
             if (PreviewParameter_PredictFileArrayIndex > 0) { button_PreviewParameter_PredictPrev.Enabled = true; }
             if (PreviewParameter_PredictFileArrayIndex >= PreviewParameter_PredictFileArray.Length - 1)
             {
@@ -165,11 +163,12 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_PredictFileArrayIndex > 0) PreviewParameter_PredictFileArrayIndex--;
-            //string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
+           
 
             PredictChartUpdate();
 
-            //Button Update
+
+            //Button Enabled Upadate
             if (PreviewParameter_PredictFileArrayIndex <= 0) { button_PreviewParameter_PredictPrev.Enabled = false; }
             if (PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) { button_PreviewParameter_PredictNext.Enabled = true; }
 
@@ -195,7 +194,7 @@ namespace AnomalyDetectionNote
             {
                 PreviewParameter_TrainFileArray = Directory.GetFiles(pathString, searchPattern, SearchOption.AllDirectories);
 
-                //Button Enable Upadate
+                //Button Enabled Upadate
                 if (PreviewParameter_TrainFileArray.Length > 1 && PreviewParameter_TrainFileArrayIndex > 0) button_PreviewParameter_TrainPrev.Enabled = true;
                 if (PreviewParameter_TrainFileArray.Length > 0 && PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) button_PreviewParameter_TrainNext.Enabled = true;
 
