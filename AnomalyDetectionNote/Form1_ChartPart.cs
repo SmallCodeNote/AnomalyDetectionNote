@@ -20,9 +20,6 @@ namespace AnomalyDetectionNote
             chart.Series.Clear();
             chart.Series.Add(series);
 
-
-            
-
             foreach (var line in lines)
             {
                 if (line.StartsWith("time")) continue; // Skip the header line
@@ -35,8 +32,6 @@ namespace AnomalyDetectionNote
 
                 series.Points.AddXY(time, value);
             }
-
-
 
             var chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Clear();
@@ -59,9 +54,12 @@ namespace AnomalyDetectionNote
 
             // Set the maximum view range to 10 points and adjust the scroll bar accordingly
             chartArea.AxisX.ScaleView.Size = series.Points.Count;
-            ScaleTrackBar.Minimum = 1;
-            ScaleTrackBar.Maximum = series.Points.Count;
-            ScaleTrackBar.Value = ScaleTrackBar.Maximum;
+            if(ScaleTrackBar.Minimum != 1) ScaleTrackBar.Minimum = 1;
+            if (ScaleTrackBar.Maximum != series.Points.Count)
+            {
+                ScaleTrackBar.Maximum = series.Points.Count;
+                ScaleTrackBar.Value = ScaleTrackBar.Maximum;
+            }
 
         }
 

@@ -111,15 +111,12 @@ namespace AnomalyDetectionNote
         #region Preview
         private void button_PreviewParameter_TrainNext_Click(object sender, EventArgs e)
         {
-            string xMin = textBox_PreviewParameter_TrainChart_xMin.Text;
-            string yMin = textBox_PreviewParameter_TrainChart_yMin.Text;
-            string yMax = textBox_PreviewParameter_TrainChart_yMax.Text;
-            string yInterval = textBox_PreviewParameter_TrainChart_yInterval.Text;
-
+            //Index Update
             if (PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) PreviewParameter_TrainFileArrayIndex++;
-            string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
+            //string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
 
-            UpdateChart(chart_PreviewParameter_Train, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_TrainChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
+
+            TrainChartUpdate();
 
 
             if (PreviewParameter_TrainFileArrayIndex > 0) { button_PreviewParameter_TrainPrev.Enabled = true; }
@@ -131,16 +128,15 @@ namespace AnomalyDetectionNote
 
         private void button_PreviewParameter_TrainPrev_Click(object sender, EventArgs e)
         {
-            string xMin = textBox_PreviewParameter_TrainChart_xMin.Text;
-            string yMin = textBox_PreviewParameter_TrainChart_yMin.Text;
-            string yMax = textBox_PreviewParameter_TrainChart_yMax.Text;
-            string yInterval = textBox_PreviewParameter_TrainChart_yInterval.Text;
-
+            //Index Update
             PreviewParameter_TrainFileArrayIndex--;
-            string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
+            //string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
 
-            UpdateChart(chart_PreviewParameter_Train, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_TrainChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
 
+            TrainChartUpdate();
+
+
+            //Button Update
             if (PreviewParameter_TrainFileArrayIndex <= 0) { button_PreviewParameter_TrainPrev.Enabled = false; }
             if (PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) { button_PreviewParameter_TrainNext.Enabled = true; }
 
@@ -148,54 +144,32 @@ namespace AnomalyDetectionNote
 
         private void button_PreviewParameter_PredictNext_Click(object sender, EventArgs e)
         {
-            string xMin = textBox_PreviewParameter_PredictChart_xMin.Text;
-            string yMin = textBox_PreviewParameter_PredictChart_yMin.Text;
-            string yMax = textBox_PreviewParameter_PredictChart_yMax.Text;
-            string yInterval = textBox_PreviewParameter_PredictChart_yInterval.Text;
-
-            int windowSize = (int)trackBarLabel_WindowSize.Value;
-            int averageSize = (int)trackBarLabel_AverageSize.Value;
-            double thresholdParam = trackBarLabel_Threshold.Value;
-
-
+            //Index Update
             if (PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) PreviewParameter_PredictFileArrayIndex++;
-            string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
+            //string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
 
-            UpdateChart(chart_PreviewParameter_Predict, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_PredictChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
 
-            TrainAndPredictGraphDraw(chart_PreviewParameter_Predict,
-               PreviewParameter_TrainFileArray, PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex],
-                windowSize: windowSize, thresholdParam: thresholdParam, averagingWindowSize: averageSize);
-            
+            PredictChartUpdate();
+
+
+            //Button Update
             if (PreviewParameter_PredictFileArrayIndex > 0) { button_PreviewParameter_PredictPrev.Enabled = true; }
             if (PreviewParameter_PredictFileArrayIndex >= PreviewParameter_PredictFileArray.Length - 1)
             {
                 button_PreviewParameter_PredictNext.Enabled = false;
             }
+
         }
 
         private void button_PreviewParameter_PredictPrev_Click(object sender, EventArgs e)
         {
-            string xMin = textBox_PreviewParameter_PredictChart_xMin.Text;
-            string yMin = textBox_PreviewParameter_PredictChart_yMin.Text;
-            string yMax = textBox_PreviewParameter_PredictChart_yMax.Text;
-            string yInterval = textBox_PreviewParameter_PredictChart_yInterval.Text;
+            //Index Update
+            if (PreviewParameter_PredictFileArrayIndex > 0) PreviewParameter_PredictFileArrayIndex--;
+            //string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
 
-            int windowSize = (int)trackBarLabel_WindowSize.Value;
-            int averageSize = (int)trackBarLabel_AverageSize.Value;
-            double thresholdParam = trackBarLabel_Threshold.Value;
+            PredictChartUpdate();
 
-            PreviewParameter_PredictFileArrayIndex--;
-            string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
-
-            UpdateChart(chart_PreviewParameter_Predict, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_PredictChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
-
-
-            TrainAndPredictGraphDraw(chart_PreviewParameter_Predict,
-                 PreviewParameter_TrainFileArray, PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex],
-                windowSize: windowSize, thresholdParam: thresholdParam, averagingWindowSize: averageSize);
-
-
+            //Button Update
             if (PreviewParameter_PredictFileArrayIndex <= 0) { button_PreviewParameter_PredictPrev.Enabled = false; }
             if (PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) { button_PreviewParameter_PredictNext.Enabled = true; }
 
@@ -221,11 +195,12 @@ namespace AnomalyDetectionNote
             {
                 PreviewParameter_TrainFileArray = Directory.GetFiles(pathString, searchPattern, SearchOption.AllDirectories);
 
+                //Button Enable Upadate
+                if (PreviewParameter_TrainFileArray.Length > 1 && PreviewParameter_TrainFileArrayIndex > 0) button_PreviewParameter_TrainPrev.Enabled = true;
+                if (PreviewParameter_TrainFileArray.Length > 0 && PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) button_PreviewParameter_TrainNext.Enabled = true;
+
                 if (PreviewParameter_TrainFileArray.Length < 1) return;
                 if (PreviewParameter_TrainFileArray.Length == 1 && PreviewParameter_TrainFileArray[0] == "") return;
-
-                if (PreviewParameter_TrainFileArray.Length > 1) button_PreviewParameter_TrainPrev.Enabled = true;
-                if (PreviewParameter_TrainFileArray.Length > 0) button_PreviewParameter_TrainNext.Enabled = true;
 
             }
 
@@ -263,11 +238,14 @@ namespace AnomalyDetectionNote
             {
                 PreviewParameter_PredictFileArray = Directory.GetFiles(pathString, searchPattern, SearchOption.AllDirectories);
 
+
+                //Button Enable Upadate
+                if (PreviewParameter_PredictFileArray.Length > 1 && PreviewParameter_PredictFileArrayIndex > 0) button_PreviewParameter_PredictPrev.Enabled = true;
+                if (PreviewParameter_PredictFileArray.Length > 0 && PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) button_PreviewParameter_PredictNext.Enabled = true;
+
                 if (PreviewParameter_PredictFileArray.Length < 1) return;
                 if (PreviewParameter_PredictFileArray.Length == 1 && PreviewParameter_PredictFileArray[0] == "") return;
 
-                if (PreviewParameter_PredictFileArray.Length > 1) button_PreviewParameter_PredictPrev.Enabled = true;
-                if (PreviewParameter_PredictFileArray.Length > 0) button_PreviewParameter_PredictNext.Enabled = true;
 
             }
 

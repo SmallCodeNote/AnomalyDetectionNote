@@ -184,6 +184,7 @@
             // 
             // button_PreviewParameter_PredictPrev
             // 
+            this.button_PreviewParameter_PredictPrev.Enabled = false;
             this.button_PreviewParameter_PredictPrev.Location = new System.Drawing.Point(355, 514);
             this.button_PreviewParameter_PredictPrev.Name = "button_PreviewParameter_PredictPrev";
             this.button_PreviewParameter_PredictPrev.Size = new System.Drawing.Size(30, 43);
@@ -194,6 +195,7 @@
             // 
             // button_PreviewParameter_TrainPrev
             // 
+            this.button_PreviewParameter_TrainPrev.Enabled = false;
             this.button_PreviewParameter_TrainPrev.Location = new System.Drawing.Point(355, 196);
             this.button_PreviewParameter_TrainPrev.Name = "button_PreviewParameter_TrainPrev";
             this.button_PreviewParameter_TrainPrev.Size = new System.Drawing.Size(30, 43);
@@ -204,6 +206,7 @@
             // 
             // button_PreviewParameter_PredictNext
             // 
+            this.button_PreviewParameter_PredictNext.Enabled = false;
             this.button_PreviewParameter_PredictNext.Location = new System.Drawing.Point(391, 514);
             this.button_PreviewParameter_PredictNext.Name = "button_PreviewParameter_PredictNext";
             this.button_PreviewParameter_PredictNext.Size = new System.Drawing.Size(29, 43);
@@ -214,6 +217,7 @@
             // 
             // button_PreviewParameter_TrainNext
             // 
+            this.button_PreviewParameter_TrainNext.Enabled = false;
             this.button_PreviewParameter_TrainNext.Location = new System.Drawing.Point(391, 196);
             this.button_PreviewParameter_TrainNext.Name = "button_PreviewParameter_TrainNext";
             this.button_PreviewParameter_TrainNext.Size = new System.Drawing.Size(29, 43);

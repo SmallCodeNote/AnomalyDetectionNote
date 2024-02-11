@@ -49,9 +49,49 @@ namespace AnomalyDetectionNote
             chartArea.AxisX.ScaleView.Position = newPosition;
 
         }
-
-        private void PredictChartUpdate(object sender, EventArgs e)
+        private void TrainChartUpdate(object sender = null, EventArgs e = null)
         {
+            double PreviewParameter_TrainChartAreaAxisX_Size = double.NaN;
+            double PreviewParameter_TrainChartAreaAxisX_Position = double.NaN;
+
+            if (chart_PreviewParameter_Train.ChartAreas.Count > 0)
+            {
+                PreviewParameter_TrainChartAreaAxisX_Size = chart_PreviewParameter_Train.ChartAreas[0].AxisX.ScaleView.Size;
+                PreviewParameter_TrainChartAreaAxisX_Position = chart_PreviewParameter_Train.ChartAreas[0].AxisX.ScaleView.Position;
+            }
+
+            string xMin = textBox_PreviewParameter_TrainChart_xMin.Text;
+            string yMin = textBox_PreviewParameter_TrainChart_yMin.Text;
+            string yMax = textBox_PreviewParameter_TrainChart_yMax.Text;
+            string yInterval = textBox_PreviewParameter_TrainChart_yInterval.Text;
+
+            string filename = PreviewParameter_TrainFileArray[PreviewParameter_TrainFileArrayIndex];
+
+            UpdateChart(chart_PreviewParameter_Train, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_TrainChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
+
+            if (!double.IsNaN(PreviewParameter_TrainChartAreaAxisX_Size))
+            {
+                chart_PreviewParameter_Train.ChartAreas[0].AxisX.ScaleView.Size = PreviewParameter_TrainChartAreaAxisX_Size;
+            };
+
+            if (!double.IsNaN(PreviewParameter_TrainChartAreaAxisX_Position))
+            {
+                chart_PreviewParameter_Train.ChartAreas[0].AxisX.ScaleView.Position = PreviewParameter_TrainChartAreaAxisX_Position;
+            };
+
+        }
+
+        private void PredictChartUpdate(object sender = null, EventArgs e = null)
+        {
+            double PreviewParameter_PredictChartAreaAxisX_Size = double.NaN;
+            double PreviewParameter_PredictChartAreaAxisX_Position = double.NaN;
+
+            if (chart_PreviewParameter_Predict.ChartAreas.Count > 0)
+            {
+                PreviewParameter_PredictChartAreaAxisX_Size = chart_PreviewParameter_Predict.ChartAreas[0].AxisX.ScaleView.Size;
+                PreviewParameter_PredictChartAreaAxisX_Position = chart_PreviewParameter_Predict.ChartAreas[0].AxisX.ScaleView.Position;
+            }
+
             string xMin = textBox_PreviewParameter_PredictChart_xMin.Text;
             string yMin = textBox_PreviewParameter_PredictChart_yMin.Text;
             string yMax = textBox_PreviewParameter_PredictChart_yMax.Text;
@@ -69,12 +109,15 @@ namespace AnomalyDetectionNote
                PreviewParameter_TrainFileArray, PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex],
                 windowSize: windowSize, thresholdParam: thresholdParam, averagingWindowSize: averageSize);
 
-            if (PreviewParameter_PredictFileArrayIndex > 0) { button_PreviewParameter_PredictPrev.Enabled = true; }
-            if (PreviewParameter_PredictFileArrayIndex >= PreviewParameter_PredictFileArray.Length - 1)
+            if (!double.IsNaN(PreviewParameter_PredictChartAreaAxisX_Size))
             {
-                button_PreviewParameter_PredictNext.Enabled = false;
-            }
+                chart_PreviewParameter_Predict.ChartAreas[0].AxisX.ScaleView.Size = PreviewParameter_PredictChartAreaAxisX_Size;
+            };
 
+            if (!double.IsNaN(PreviewParameter_PredictChartAreaAxisX_Position))
+            {
+                chart_PreviewParameter_Predict.ChartAreas[0].AxisX.ScaleView.Position = PreviewParameter_PredictChartAreaAxisX_Position;
+            };
         }
 
 
@@ -118,7 +161,7 @@ namespace AnomalyDetectionNote
 
                     if ((predictions[dataIndex]).Prediction[0] > 0.3)
                     {
-                        
+
                         anomalyCount++;
                         TimeSeriesData t = predictTimeSeries[dataIndex];
                         chartGraph_Point.Points.AddXY(t.time, t.value);
