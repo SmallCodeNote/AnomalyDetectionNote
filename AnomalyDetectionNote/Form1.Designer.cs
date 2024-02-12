@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage_PreviewParameter = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox_PreviewParameter_DetectionMode = new System.Windows.Forms.GroupBox();
             this.radioButton_PreviewParameter_DetectionMode_Entire = new System.Windows.Forms.RadioButton();
             this.radioButton_PreviewParameter_DetectionMode_Standard = new System.Windows.Forms.RadioButton();
@@ -79,14 +83,49 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label_PreviewParameter_Chart_Max = new System.Windows.Forms.Label();
             this.label_PreviewParameter_TargetFilename = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage_ScanFiles = new System.Windows.Forms.TabPage();
+            this.groupBox_ScanFiles_Parameters = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_Sensitivity = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_BatchSize = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_JudgementWindowSize = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_WindowSize = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_Threshold = new System.Windows.Forms.GroupBox();
+            this.groupBox_ScanFiles_AverageSize = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton_ScanFiles_DetectionMode_Entire = new System.Windows.Forms.RadioButton();
+            this.radioButton_ScanFiles_DetectionMode_Standard = new System.Windows.Forms.RadioButton();
+            this.button_ScanFiles_Run = new System.Windows.Forms.Button();
+            this.button_ScanFiles_PredictPrev = new System.Windows.Forms.Button();
+            this.button_ScanFiles_PredictNext = new System.Windows.Forms.Button();
+            this.label_chart_ScanFiles_Predict = new System.Windows.Forms.Label();
+            this.groupBox_ScanFiles_PredictChartScale = new System.Windows.Forms.GroupBox();
+            this.textBox_ScanFiles_PredictChart_xMin = new System.Windows.Forms.TextBox();
+            this.textBox_ScanFiles_PredictChart_yInterval = new System.Windows.Forms.TextBox();
+            this.textBox_ScanFiles_PredictChart_yMin = new System.Windows.Forms.TextBox();
+            this.textBox_ScanFiles_PredictChart_yMax = new System.Windows.Forms.TextBox();
+            this.chart_ScanFiles_Predict = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox_ScanFiles_PredictFilename_SearchPattern = new System.Windows.Forms.TextBox();
+            this.button_ScanFiles_PredictPath = new System.Windows.Forms.Button();
+            this.textBox_ScanFiles_PredictPath = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tabPage_CreateDammyData = new System.Windows.Forms.TabPage();
+            this.button_ScanFiles_GetSrCnnParamFromPreview = new System.Windows.Forms.Button();
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add = new System.Windows.Forms.CheckBox();
+            this.progressBar_ScanFiles = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker_ScanFiles_Run = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage_PreviewParameter.SuspendLayout();
             this.groupBox_PreviewParameter_DetectionMode.SuspendLayout();
             this.groupBox_PreviewParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Predict)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Train)).BeginInit();
+            this.tabPage_ScanFiles.SuspendLayout();
+            this.groupBox_ScanFiles_Parameters.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_ScanFiles_Predict)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -100,58 +139,69 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage_PreviewParameter);
+            this.tabControl1.Controls.Add(this.tabPage_ScanFiles);
+            this.tabControl1.Controls.Add(this.tabPage_CreateDammyData);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1170, 788);
             this.tabControl1.TabIndex = 1;
             // 
-            // tabPage2
+            // tabPage_PreviewParameter
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.groupBox_PreviewParameter_DetectionMode);
-            this.tabPage2.Controls.Add(this.groupBox_PreviewParameters);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_PredictPrev);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_TrainPrev);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_PredictNext);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_TrainNext);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictFilename_SearchPattern);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainFilename_SearchPattern);
-            this.tabPage2.Controls.Add(this.label_chart_PreviewParameter_Predict);
-            this.tabPage2.Controls.Add(this.label_chart_PreviewParameter_Train);
-            this.tabPage2.Controls.Add(this.groupBox_PreviewParameter_PredictChartScale);
-            this.tabPage2.Controls.Add(this.groupBox_PreviewParameter_TrainChartScale);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictChart_xMin);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainChart_xMin);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictChart_yInterval);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainChart_yInterval);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictChart_yMin);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainChart_yMin);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictChart_yMax);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainChart_yMax);
-            this.tabPage2.Controls.Add(this.chart_PreviewParameter_Predict);
-            this.tabPage2.Controls.Add(this.chart_PreviewParameter_Train);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_PredictPath);
-            this.tabPage2.Controls.Add(this.button_PreviewParameter_TrainPath);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_PredictPath);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox_PreviewParameter_TrainPath);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.label_PreviewParameter_Chart_Min);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label_PreviewParameter_Chart_Max);
-            this.tabPage2.Controls.Add(this.label_PreviewParameter_TargetFilename);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1162, 759);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "PreviewParameter";
+            this.tabPage_PreviewParameter.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage_PreviewParameter.Controls.Add(this.button1);
+            this.tabPage_PreviewParameter.Controls.Add(this.groupBox_PreviewParameter_DetectionMode);
+            this.tabPage_PreviewParameter.Controls.Add(this.groupBox_PreviewParameters);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_PredictPrev);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_TrainPrev);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_PredictNext);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_TrainNext);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictFilename_SearchPattern);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainFilename_SearchPattern);
+            this.tabPage_PreviewParameter.Controls.Add(this.label_chart_PreviewParameter_Predict);
+            this.tabPage_PreviewParameter.Controls.Add(this.label_chart_PreviewParameter_Train);
+            this.tabPage_PreviewParameter.Controls.Add(this.groupBox_PreviewParameter_PredictChartScale);
+            this.tabPage_PreviewParameter.Controls.Add(this.groupBox_PreviewParameter_TrainChartScale);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictChart_xMin);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainChart_xMin);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictChart_yInterval);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainChart_yInterval);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictChart_yMin);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainChart_yMin);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictChart_yMax);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainChart_yMax);
+            this.tabPage_PreviewParameter.Controls.Add(this.chart_PreviewParameter_Predict);
+            this.tabPage_PreviewParameter.Controls.Add(this.chart_PreviewParameter_Train);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_PredictPath);
+            this.tabPage_PreviewParameter.Controls.Add(this.button_PreviewParameter_TrainPath);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_PredictPath);
+            this.tabPage_PreviewParameter.Controls.Add(this.label5);
+            this.tabPage_PreviewParameter.Controls.Add(this.textBox_PreviewParameter_TrainPath);
+            this.tabPage_PreviewParameter.Controls.Add(this.label4);
+            this.tabPage_PreviewParameter.Controls.Add(this.label1);
+            this.tabPage_PreviewParameter.Controls.Add(this.label_PreviewParameter_Chart_Min);
+            this.tabPage_PreviewParameter.Controls.Add(this.label3);
+            this.tabPage_PreviewParameter.Controls.Add(this.label2);
+            this.tabPage_PreviewParameter.Controls.Add(this.label_PreviewParameter_Chart_Max);
+            this.tabPage_PreviewParameter.Controls.Add(this.label_PreviewParameter_TargetFilename);
+            this.tabPage_PreviewParameter.Location = new System.Drawing.Point(4, 25);
+            this.tabPage_PreviewParameter.Name = "tabPage_PreviewParameter";
+            this.tabPage_PreviewParameter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_PreviewParameter.Size = new System.Drawing.Size(1162, 759);
+            this.tabPage_PreviewParameter.TabIndex = 1;
+            this.tabPage_PreviewParameter.Text = "PreviewParameter";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(370, 695);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 26);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox_PreviewParameter_DetectionMode
             // 
@@ -194,16 +244,16 @@
             this.groupBox_PreviewParameters.Controls.Add(this.groupBox_WindowSize);
             this.groupBox_PreviewParameters.Controls.Add(this.groupBox_Threshold);
             this.groupBox_PreviewParameters.Controls.Add(this.groupBox_AverageSize);
-            this.groupBox_PreviewParameters.Location = new System.Drawing.Point(10, 111);
+            this.groupBox_PreviewParameters.Location = new System.Drawing.Point(10, 110);
             this.groupBox_PreviewParameters.Name = "groupBox_PreviewParameters";
-            this.groupBox_PreviewParameters.Size = new System.Drawing.Size(332, 583);
+            this.groupBox_PreviewParameters.Size = new System.Drawing.Size(330, 580);
             this.groupBox_PreviewParameters.TabIndex = 31;
             this.groupBox_PreviewParameters.TabStop = false;
             this.groupBox_PreviewParameters.Text = "SR-CNN Parameter";
             // 
             // groupBox_Sensitivity
             // 
-            this.groupBox_Sensitivity.Location = new System.Drawing.Point(18, 485);
+            this.groupBox_Sensitivity.Location = new System.Drawing.Point(15, 485);
             this.groupBox_Sensitivity.Name = "groupBox_Sensitivity";
             this.groupBox_Sensitivity.Size = new System.Drawing.Size(300, 80);
             this.groupBox_Sensitivity.TabIndex = 24;
@@ -212,7 +262,7 @@
             // 
             // groupBox_BatchSize
             // 
-            this.groupBox_BatchSize.Location = new System.Drawing.Point(18, 393);
+            this.groupBox_BatchSize.Location = new System.Drawing.Point(15, 393);
             this.groupBox_BatchSize.Name = "groupBox_BatchSize";
             this.groupBox_BatchSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_BatchSize.TabIndex = 24;
@@ -221,7 +271,7 @@
             // 
             // groupBox_JudgementWindowSize
             // 
-            this.groupBox_JudgementWindowSize.Location = new System.Drawing.Point(18, 212);
+            this.groupBox_JudgementWindowSize.Location = new System.Drawing.Point(15, 212);
             this.groupBox_JudgementWindowSize.Name = "groupBox_JudgementWindowSize";
             this.groupBox_JudgementWindowSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_JudgementWindowSize.TabIndex = 23;
@@ -230,7 +280,7 @@
             // 
             // groupBox_WindowSize
             // 
-            this.groupBox_WindowSize.Location = new System.Drawing.Point(18, 114);
+            this.groupBox_WindowSize.Location = new System.Drawing.Point(15, 115);
             this.groupBox_WindowSize.Name = "groupBox_WindowSize";
             this.groupBox_WindowSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_WindowSize.TabIndex = 22;
@@ -239,7 +289,7 @@
             // 
             // groupBox_Threshold
             // 
-            this.groupBox_Threshold.Location = new System.Drawing.Point(18, 21);
+            this.groupBox_Threshold.Location = new System.Drawing.Point(15, 20);
             this.groupBox_Threshold.Name = "groupBox_Threshold";
             this.groupBox_Threshold.Size = new System.Drawing.Size(300, 80);
             this.groupBox_Threshold.TabIndex = 22;
@@ -248,7 +298,7 @@
             // 
             // groupBox_AverageSize
             // 
-            this.groupBox_AverageSize.Location = new System.Drawing.Point(18, 307);
+            this.groupBox_AverageSize.Location = new System.Drawing.Point(15, 307);
             this.groupBox_AverageSize.Name = "groupBox_AverageSize";
             this.groupBox_AverageSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_AverageSize.TabIndex = 22;
@@ -301,14 +351,14 @@
             // 
             // textBox_PreviewParameter_PredictFilename_SearchPattern
             // 
-            this.textBox_PreviewParameter_PredictFilename_SearchPattern.Location = new System.Drawing.Point(1035, 83);
+            this.textBox_PreviewParameter_PredictFilename_SearchPattern.Location = new System.Drawing.Point(1025, 74);
             this.textBox_PreviewParameter_PredictFilename_SearchPattern.Name = "textBox_PreviewParameter_PredictFilename_SearchPattern";
             this.textBox_PreviewParameter_PredictFilename_SearchPattern.Size = new System.Drawing.Size(100, 22);
             this.textBox_PreviewParameter_PredictFilename_SearchPattern.TabIndex = 29;
             // 
             // textBox_PreviewParameter_TrainFilename_SearchPattern
             // 
-            this.textBox_PreviewParameter_TrainFilename_SearchPattern.Location = new System.Drawing.Point(1035, 40);
+            this.textBox_PreviewParameter_TrainFilename_SearchPattern.Location = new System.Drawing.Point(1025, 31);
             this.textBox_PreviewParameter_TrainFilename_SearchPattern.Name = "textBox_PreviewParameter_TrainFilename_SearchPattern";
             this.textBox_PreviewParameter_TrainFilename_SearchPattern.Size = new System.Drawing.Size(100, 22);
             this.textBox_PreviewParameter_TrainFilename_SearchPattern.TabIndex = 29;
@@ -407,39 +457,39 @@
             // 
             // chart_PreviewParameter_Predict
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart_PreviewParameter_Predict.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart_PreviewParameter_Predict.Legends.Add(legend1);
+            chartArea5.Name = "ChartArea1";
+            this.chart_PreviewParameter_Predict.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart_PreviewParameter_Predict.Legends.Add(legend5);
             this.chart_PreviewParameter_Predict.Location = new System.Drawing.Point(411, 447);
             this.chart_PreviewParameter_Predict.Name = "chart_PreviewParameter_Predict";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart_PreviewParameter_Predict.Series.Add(series1);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart_PreviewParameter_Predict.Series.Add(series5);
             this.chart_PreviewParameter_Predict.Size = new System.Drawing.Size(720, 200);
             this.chart_PreviewParameter_Predict.TabIndex = 26;
             this.chart_PreviewParameter_Predict.Text = "chart1";
             // 
             // chart_PreviewParameter_Train
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart_PreviewParameter_Train.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart_PreviewParameter_Train.Legends.Add(legend2);
+            chartArea6.Name = "ChartArea1";
+            this.chart_PreviewParameter_Train.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart_PreviewParameter_Train.Legends.Add(legend6);
             this.chart_PreviewParameter_Train.Location = new System.Drawing.Point(411, 129);
             this.chart_PreviewParameter_Train.Name = "chart_PreviewParameter_Train";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart_PreviewParameter_Train.Series.Add(series2);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart_PreviewParameter_Train.Series.Add(series6);
             this.chart_PreviewParameter_Train.Size = new System.Drawing.Size(720, 200);
             this.chart_PreviewParameter_Train.TabIndex = 26;
             this.chart_PreviewParameter_Train.Text = "chart1";
             // 
             // button_PreviewParameter_PredictPath
             // 
-            this.button_PreviewParameter_PredictPath.Location = new System.Drawing.Point(37, 83);
+            this.button_PreviewParameter_PredictPath.Location = new System.Drawing.Point(27, 74);
             this.button_PreviewParameter_PredictPath.Name = "button_PreviewParameter_PredictPath";
             this.button_PreviewParameter_PredictPath.Size = new System.Drawing.Size(26, 22);
             this.button_PreviewParameter_PredictPath.TabIndex = 25;
@@ -449,7 +499,7 @@
             // 
             // button_PreviewParameter_TrainPath
             // 
-            this.button_PreviewParameter_TrainPath.Location = new System.Drawing.Point(37, 39);
+            this.button_PreviewParameter_TrainPath.Location = new System.Drawing.Point(27, 30);
             this.button_PreviewParameter_TrainPath.Name = "button_PreviewParameter_TrainPath";
             this.button_PreviewParameter_TrainPath.Size = new System.Drawing.Size(26, 22);
             this.button_PreviewParameter_TrainPath.TabIndex = 25;
@@ -459,7 +509,7 @@
             // 
             // textBox_PreviewParameter_PredictPath
             // 
-            this.textBox_PreviewParameter_PredictPath.Location = new System.Drawing.Point(69, 83);
+            this.textBox_PreviewParameter_PredictPath.Location = new System.Drawing.Point(59, 74);
             this.textBox_PreviewParameter_PredictPath.Name = "textBox_PreviewParameter_PredictPath";
             this.textBox_PreviewParameter_PredictPath.Size = new System.Drawing.Size(960, 22);
             this.textBox_PreviewParameter_PredictPath.TabIndex = 24;
@@ -476,7 +526,7 @@
             // 
             // textBox_PreviewParameter_TrainPath
             // 
-            this.textBox_PreviewParameter_TrainPath.Location = new System.Drawing.Point(69, 39);
+            this.textBox_PreviewParameter_TrainPath.Location = new System.Drawing.Point(59, 30);
             this.textBox_PreviewParameter_TrainPath.Name = "textBox_PreviewParameter_TrainPath";
             this.textBox_PreviewParameter_TrainPath.Size = new System.Drawing.Size(960, 22);
             this.textBox_PreviewParameter_TrainPath.TabIndex = 24;
@@ -521,7 +571,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 65);
+            this.label2.Location = new System.Drawing.Point(24, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(151, 15);
             this.label2.TabIndex = 23;
@@ -539,31 +589,342 @@
             // label_PreviewParameter_TargetFilename
             // 
             this.label_PreviewParameter_TargetFilename.AutoSize = true;
-            this.label_PreviewParameter_TargetFilename.Location = new System.Drawing.Point(34, 21);
+            this.label_PreviewParameter_TargetFilename.Location = new System.Drawing.Point(24, 12);
             this.label_PreviewParameter_TargetFilename.Name = "label_PreviewParameter_TargetFilename";
             this.label_PreviewParameter_TargetFilename.Size = new System.Drawing.Size(138, 15);
             this.label_PreviewParameter_TargetFilename.TabIndex = 23;
             this.label_PreviewParameter_TargetFilename.Text = "TrainFile / Directory";
             // 
-            // tabPage1
+            // tabPage_ScanFiles
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1162, 759);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "EntireDataDitection";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage_ScanFiles.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage_ScanFiles.Controls.Add(this.progressBar_ScanFiles);
+            this.tabPage_ScanFiles.Controls.Add(this.groupBox_ScanFiles_Parameters);
+            this.tabPage_ScanFiles.Controls.Add(this.groupBox1);
+            this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_Run);
+            this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_PredictPrev);
+            this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_PredictNext);
+            this.tabPage_ScanFiles.Controls.Add(this.label_chart_ScanFiles_Predict);
+            this.tabPage_ScanFiles.Controls.Add(this.groupBox_ScanFiles_PredictChartScale);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictChart_xMin);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictChart_yInterval);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictChart_yMin);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictChart_yMax);
+            this.tabPage_ScanFiles.Controls.Add(this.chart_ScanFiles_Predict);
+            this.tabPage_ScanFiles.Controls.Add(this.label8);
+            this.tabPage_ScanFiles.Controls.Add(this.label9);
+            this.tabPage_ScanFiles.Controls.Add(this.label10);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictFilename_SearchPattern);
+            this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_PredictPath);
+            this.tabPage_ScanFiles.Controls.Add(this.textBox_ScanFiles_PredictPath);
+            this.tabPage_ScanFiles.Controls.Add(this.label6);
+            this.tabPage_ScanFiles.Location = new System.Drawing.Point(4, 25);
+            this.tabPage_ScanFiles.Name = "tabPage_ScanFiles";
+            this.tabPage_ScanFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_ScanFiles.Size = new System.Drawing.Size(1162, 759);
+            this.tabPage_ScanFiles.TabIndex = 0;
+            this.tabPage_ScanFiles.Text = "ScanFiles";
             // 
-            // button1
+            // groupBox_ScanFiles_Parameters
             // 
-            this.button1.Location = new System.Drawing.Point(370, 695);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 26);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_Sensitivity);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_BatchSize);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.button_ScanFiles_GetSrCnnParamFromPreview);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_JudgementWindowSize);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_WindowSize);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_Threshold);
+            this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_AverageSize);
+            this.groupBox_ScanFiles_Parameters.Location = new System.Drawing.Point(10, 110);
+            this.groupBox_ScanFiles_Parameters.Name = "groupBox_ScanFiles_Parameters";
+            this.groupBox_ScanFiles_Parameters.Size = new System.Drawing.Size(330, 580);
+            this.groupBox_ScanFiles_Parameters.TabIndex = 48;
+            this.groupBox_ScanFiles_Parameters.TabStop = false;
+            this.groupBox_ScanFiles_Parameters.Text = "SR-CNN Parameter";
+            // 
+            // groupBox_ScanFiles_Sensitivity
+            // 
+            this.groupBox_ScanFiles_Sensitivity.Location = new System.Drawing.Point(15, 489);
+            this.groupBox_ScanFiles_Sensitivity.Name = "groupBox_ScanFiles_Sensitivity";
+            this.groupBox_ScanFiles_Sensitivity.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_Sensitivity.TabIndex = 29;
+            this.groupBox_ScanFiles_Sensitivity.TabStop = false;
+            this.groupBox_ScanFiles_Sensitivity.Text = "Sensitivity";
+            // 
+            // groupBox_ScanFiles_BatchSize
+            // 
+            this.groupBox_ScanFiles_BatchSize.Location = new System.Drawing.Point(15, 397);
+            this.groupBox_ScanFiles_BatchSize.Name = "groupBox_ScanFiles_BatchSize";
+            this.groupBox_ScanFiles_BatchSize.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_BatchSize.TabIndex = 30;
+            this.groupBox_ScanFiles_BatchSize.TabStop = false;
+            this.groupBox_ScanFiles_BatchSize.Text = "BatchSize";
+            // 
+            // groupBox_ScanFiles_JudgementWindowSize
+            // 
+            this.groupBox_ScanFiles_JudgementWindowSize.Location = new System.Drawing.Point(15, 216);
+            this.groupBox_ScanFiles_JudgementWindowSize.Name = "groupBox_ScanFiles_JudgementWindowSize";
+            this.groupBox_ScanFiles_JudgementWindowSize.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_JudgementWindowSize.TabIndex = 28;
+            this.groupBox_ScanFiles_JudgementWindowSize.TabStop = false;
+            this.groupBox_ScanFiles_JudgementWindowSize.Text = "JudgementWindowSize";
+            // 
+            // groupBox_ScanFiles_WindowSize
+            // 
+            this.groupBox_ScanFiles_WindowSize.Location = new System.Drawing.Point(15, 118);
+            this.groupBox_ScanFiles_WindowSize.Name = "groupBox_ScanFiles_WindowSize";
+            this.groupBox_ScanFiles_WindowSize.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_WindowSize.TabIndex = 25;
+            this.groupBox_ScanFiles_WindowSize.TabStop = false;
+            this.groupBox_ScanFiles_WindowSize.Text = "WindowSize";
+            // 
+            // groupBox_ScanFiles_Threshold
+            // 
+            this.groupBox_ScanFiles_Threshold.Location = new System.Drawing.Point(15, 25);
+            this.groupBox_ScanFiles_Threshold.Name = "groupBox_ScanFiles_Threshold";
+            this.groupBox_ScanFiles_Threshold.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_Threshold.TabIndex = 26;
+            this.groupBox_ScanFiles_Threshold.TabStop = false;
+            this.groupBox_ScanFiles_Threshold.Text = "Threshold";
+            // 
+            // groupBox_ScanFiles_AverageSize
+            // 
+            this.groupBox_ScanFiles_AverageSize.Location = new System.Drawing.Point(15, 311);
+            this.groupBox_ScanFiles_AverageSize.Name = "groupBox_ScanFiles_AverageSize";
+            this.groupBox_ScanFiles_AverageSize.Size = new System.Drawing.Size(300, 60);
+            this.groupBox_ScanFiles_AverageSize.TabIndex = 27;
+            this.groupBox_ScanFiles_AverageSize.TabStop = false;
+            this.groupBox_ScanFiles_AverageSize.Text = "AverageSize";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton_ScanFiles_DetectionMode_Entire);
+            this.groupBox1.Controls.Add(this.radioButton_ScanFiles_DetectionMode_Standard);
+            this.groupBox1.Location = new System.Drawing.Point(10, 700);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(332, 53);
+            this.groupBox1.TabIndex = 47;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "DetectionMode";
+            // 
+            // radioButton_ScanFiles_DetectionMode_Entire
+            // 
+            this.radioButton_ScanFiles_DetectionMode_Entire.AutoSize = true;
+            this.radioButton_ScanFiles_DetectionMode_Entire.Location = new System.Drawing.Point(162, 21);
+            this.radioButton_ScanFiles_DetectionMode_Entire.Name = "radioButton_ScanFiles_DetectionMode_Entire";
+            this.radioButton_ScanFiles_DetectionMode_Entire.Size = new System.Drawing.Size(65, 19);
+            this.radioButton_ScanFiles_DetectionMode_Entire.TabIndex = 1;
+            this.radioButton_ScanFiles_DetectionMode_Entire.Text = "Entire";
+            this.radioButton_ScanFiles_DetectionMode_Entire.UseVisualStyleBackColor = true;
+            this.radioButton_ScanFiles_DetectionMode_Entire.CheckedChanged += new System.EventHandler(this.radioButton_ScanFiles_DetectionMode_Entire_CheckedChanged);
+            // 
+            // radioButton_ScanFiles_DetectionMode_Standard
+            // 
+            this.radioButton_ScanFiles_DetectionMode_Standard.AutoSize = true;
+            this.radioButton_ScanFiles_DetectionMode_Standard.Location = new System.Drawing.Point(6, 21);
+            this.radioButton_ScanFiles_DetectionMode_Standard.Name = "radioButton_ScanFiles_DetectionMode_Standard";
+            this.radioButton_ScanFiles_DetectionMode_Standard.Size = new System.Drawing.Size(83, 19);
+            this.radioButton_ScanFiles_DetectionMode_Standard.TabIndex = 0;
+            this.radioButton_ScanFiles_DetectionMode_Standard.Text = "Standard";
+            this.radioButton_ScanFiles_DetectionMode_Standard.UseVisualStyleBackColor = true;
+            this.radioButton_ScanFiles_DetectionMode_Standard.CheckedChanged += new System.EventHandler(this.radioButton_ScanFiles_DetectionMode_Standard_CheckedChanged);
+            // 
+            // button_ScanFiles_Run
+            // 
+            this.button_ScanFiles_Run.Location = new System.Drawing.Point(23, 62);
+            this.button_ScanFiles_Run.Name = "button_ScanFiles_Run";
+            this.button_ScanFiles_Run.Size = new System.Drawing.Size(88, 30);
+            this.button_ScanFiles_Run.TabIndex = 46;
+            this.button_ScanFiles_Run.Text = "Run";
+            this.button_ScanFiles_Run.UseVisualStyleBackColor = true;
+            this.button_ScanFiles_Run.Click += new System.EventHandler(this.button_ScanFiles_Run_Click);
+            // 
+            // button_ScanFiles_PredictPrev
+            // 
+            this.button_ScanFiles_PredictPrev.Enabled = false;
+            this.button_ScanFiles_PredictPrev.Location = new System.Drawing.Point(362, 202);
+            this.button_ScanFiles_PredictPrev.Name = "button_ScanFiles_PredictPrev";
+            this.button_ScanFiles_PredictPrev.Size = new System.Drawing.Size(30, 43);
+            this.button_ScanFiles_PredictPrev.TabIndex = 44;
+            this.button_ScanFiles_PredictPrev.Text = "<";
+            this.button_ScanFiles_PredictPrev.UseVisualStyleBackColor = true;
+            // 
+            // button_ScanFiles_PredictNext
+            // 
+            this.button_ScanFiles_PredictNext.Enabled = false;
+            this.button_ScanFiles_PredictNext.Location = new System.Drawing.Point(398, 202);
+            this.button_ScanFiles_PredictNext.Name = "button_ScanFiles_PredictNext";
+            this.button_ScanFiles_PredictNext.Size = new System.Drawing.Size(29, 43);
+            this.button_ScanFiles_PredictNext.TabIndex = 45;
+            this.button_ScanFiles_PredictNext.Text = ">";
+            this.button_ScanFiles_PredictNext.UseVisualStyleBackColor = true;
+            // 
+            // label_chart_ScanFiles_Predict
+            // 
+            this.label_chart_ScanFiles_Predict.AutoSize = true;
+            this.label_chart_ScanFiles_Predict.Location = new System.Drawing.Point(426, 117);
+            this.label_chart_ScanFiles_Predict.Name = "label_chart_ScanFiles_Predict";
+            this.label_chart_ScanFiles_Predict.Size = new System.Drawing.Size(16, 15);
+            this.label_chart_ScanFiles_Predict.TabIndex = 43;
+            this.label_chart_ScanFiles_Predict.Text = "...";
+            // 
+            // groupBox_ScanFiles_PredictChartScale
+            // 
+            this.groupBox_ScanFiles_PredictChartScale.Location = new System.Drawing.Point(468, 352);
+            this.groupBox_ScanFiles_PredictChartScale.Name = "groupBox_ScanFiles_PredictChartScale";
+            this.groupBox_ScanFiles_PredictChartScale.Size = new System.Drawing.Size(674, 80);
+            this.groupBox_ScanFiles_PredictChartScale.TabIndex = 34;
+            this.groupBox_ScanFiles_PredictChartScale.TabStop = false;
+            this.groupBox_ScanFiles_PredictChartScale.Text = "Scale";
+            // 
+            // textBox_ScanFiles_PredictChart_xMin
+            // 
+            this.textBox_ScanFiles_PredictChart_xMin.Location = new System.Drawing.Point(468, 324);
+            this.textBox_ScanFiles_PredictChart_xMin.Name = "textBox_ScanFiles_PredictChart_xMin";
+            this.textBox_ScanFiles_PredictChart_xMin.Size = new System.Drawing.Size(80, 22);
+            this.textBox_ScanFiles_PredictChart_xMin.TabIndex = 39;
+            // 
+            // textBox_ScanFiles_PredictChart_yInterval
+            // 
+            this.textBox_ScanFiles_PredictChart_yInterval.Location = new System.Drawing.Point(358, 324);
+            this.textBox_ScanFiles_PredictChart_yInterval.Name = "textBox_ScanFiles_PredictChart_yInterval";
+            this.textBox_ScanFiles_PredictChart_yInterval.Size = new System.Drawing.Size(80, 22);
+            this.textBox_ScanFiles_PredictChart_yInterval.TabIndex = 40;
+            // 
+            // textBox_ScanFiles_PredictChart_yMin
+            // 
+            this.textBox_ScanFiles_PredictChart_yMin.Location = new System.Drawing.Point(358, 284);
+            this.textBox_ScanFiles_PredictChart_yMin.Name = "textBox_ScanFiles_PredictChart_yMin";
+            this.textBox_ScanFiles_PredictChart_yMin.Size = new System.Drawing.Size(80, 22);
+            this.textBox_ScanFiles_PredictChart_yMin.TabIndex = 41;
+            // 
+            // textBox_ScanFiles_PredictChart_yMax
+            // 
+            this.textBox_ScanFiles_PredictChart_yMax.Location = new System.Drawing.Point(358, 152);
+            this.textBox_ScanFiles_PredictChart_yMax.Name = "textBox_ScanFiles_PredictChart_yMax";
+            this.textBox_ScanFiles_PredictChart_yMax.Size = new System.Drawing.Size(80, 22);
+            this.textBox_ScanFiles_PredictChart_yMax.TabIndex = 42;
+            // 
+            // chart_ScanFiles_Predict
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chart_ScanFiles_Predict.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart_ScanFiles_Predict.Legends.Add(legend4);
+            this.chart_ScanFiles_Predict.Location = new System.Drawing.Point(418, 135);
+            this.chart_ScanFiles_Predict.Name = "chart_ScanFiles_Predict";
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart_ScanFiles_Predict.Series.Add(series4);
+            this.chart_ScanFiles_Predict.Size = new System.Drawing.Size(720, 200);
+            this.chart_ScanFiles_Predict.TabIndex = 38;
+            this.chart_ScanFiles_Predict.Text = "chart1";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(355, 309);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 15);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "yInterval";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(355, 266);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 15);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "yMin";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(355, 135);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 15);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "yMax";
+            // 
+            // textBox_ScanFiles_PredictFilename_SearchPattern
+            // 
+            this.textBox_ScanFiles_PredictFilename_SearchPattern.Location = new System.Drawing.Point(1021, 34);
+            this.textBox_ScanFiles_PredictFilename_SearchPattern.Name = "textBox_ScanFiles_PredictFilename_SearchPattern";
+            this.textBox_ScanFiles_PredictFilename_SearchPattern.Size = new System.Drawing.Size(100, 22);
+            this.textBox_ScanFiles_PredictFilename_SearchPattern.TabIndex = 33;
+            // 
+            // button_ScanFiles_PredictPath
+            // 
+            this.button_ScanFiles_PredictPath.Location = new System.Drawing.Point(23, 34);
+            this.button_ScanFiles_PredictPath.Name = "button_ScanFiles_PredictPath";
+            this.button_ScanFiles_PredictPath.Size = new System.Drawing.Size(26, 22);
+            this.button_ScanFiles_PredictPath.TabIndex = 32;
+            this.button_ScanFiles_PredictPath.Text = "...";
+            this.button_ScanFiles_PredictPath.UseVisualStyleBackColor = true;
+            this.button_ScanFiles_PredictPath.Click += new System.EventHandler(this.button_ScanFiles_PredictPath_Click);
+            // 
+            // textBox_ScanFiles_PredictPath
+            // 
+            this.textBox_ScanFiles_PredictPath.Location = new System.Drawing.Point(55, 34);
+            this.textBox_ScanFiles_PredictPath.Name = "textBox_ScanFiles_PredictPath";
+            this.textBox_ScanFiles_PredictPath.Size = new System.Drawing.Size(960, 22);
+            this.textBox_ScanFiles_PredictPath.TabIndex = 31;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(151, 15);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "PredictFile / Directory";
+            // 
+            // tabPage_CreateDammyData
+            // 
+            this.tabPage_CreateDammyData.Location = new System.Drawing.Point(4, 25);
+            this.tabPage_CreateDammyData.Name = "tabPage_CreateDammyData";
+            this.tabPage_CreateDammyData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_CreateDammyData.Size = new System.Drawing.Size(1162, 759);
+            this.tabPage_CreateDammyData.TabIndex = 2;
+            this.tabPage_CreateDammyData.Text = "CreateDammyData";
+            this.tabPage_CreateDammyData.UseVisualStyleBackColor = true;
+            // 
+            // button_ScanFiles_GetSrCnnParamFromPreview
+            // 
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Location = new System.Drawing.Point(91, 551);
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Name = "button_ScanFiles_GetSrCnnParamFromPreview";
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Size = new System.Drawing.Size(224, 23);
+            this.button_ScanFiles_GetSrCnnParamFromPreview.TabIndex = 46;
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Text = "GetParameterFromPreview";
+            this.button_ScanFiles_GetSrCnnParamFromPreview.UseVisualStyleBackColor = true;
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Click += new System.EventHandler(this.button_ScanFiles_GetSrCnnParamFromPreview_Click);
+            // 
+            // checkBox_ScanFiles_GetSrCnnParamFromPreview_Add
+            // 
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.AutoSize = true;
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Location = new System.Drawing.Point(15, 554);
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Name = "checkBox_ScanFiles_GetSrCnnParamFromPreview_Add";
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Size = new System.Drawing.Size(52, 19);
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.TabIndex = 47;
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Text = "Add";
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.UseVisualStyleBackColor = true;
+            // 
+            // progressBar_ScanFiles
+            // 
+            this.progressBar_ScanFiles.Location = new System.Drawing.Point(817, 62);
+            this.progressBar_ScanFiles.Name = "progressBar_ScanFiles";
+            this.progressBar_ScanFiles.Size = new System.Drawing.Size(304, 23);
+            this.progressBar_ScanFiles.TabIndex = 49;
+            // 
+            // backgroundWorker_ScanFiles_Run
+            // 
+            this.backgroundWorker_ScanFiles_Run.WorkerReportsProgress = true;
+            this.backgroundWorker_ScanFiles_Run.WorkerSupportsCancellation = true;
+            this.backgroundWorker_ScanFiles_Run.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_ScanFiles_Run_DoWork);
+            this.backgroundWorker_ScanFiles_Run.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ScanFiles_Run_ProgressChanged);
+            this.backgroundWorker_ScanFiles_Run.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_ScanFiles_Run_RunWorkerCompleted);
             // 
             // Form1
             // 
@@ -577,13 +938,20 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPage_PreviewParameter.ResumeLayout(false);
+            this.tabPage_PreviewParameter.PerformLayout();
             this.groupBox_PreviewParameter_DetectionMode.ResumeLayout(false);
             this.groupBox_PreviewParameter_DetectionMode.PerformLayout();
             this.groupBox_PreviewParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Predict)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Train)).EndInit();
+            this.tabPage_ScanFiles.ResumeLayout(false);
+            this.tabPage_ScanFiles.PerformLayout();
+            this.groupBox_ScanFiles_Parameters.ResumeLayout(false);
+            this.groupBox_ScanFiles_Parameters.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_ScanFiles_Predict)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,8 +961,8 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage_ScanFiles;
+        private System.Windows.Forms.TabPage tabPage_PreviewParameter;
         private System.Windows.Forms.GroupBox groupBox_WindowSize;
         private System.Windows.Forms.GroupBox groupBox_AverageSize;
         private System.Windows.Forms.GroupBox groupBox_Threshold;
@@ -638,6 +1006,38 @@
         private System.Windows.Forms.GroupBox groupBox_BatchSize;
         private System.Windows.Forms.GroupBox groupBox_Sensitivity;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictFilename_SearchPattern;
+        private System.Windows.Forms.Button button_ScanFiles_PredictPath;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictPath;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage tabPage_CreateDammyData;
+        private System.Windows.Forms.Button button_ScanFiles_PredictPrev;
+        private System.Windows.Forms.Button button_ScanFiles_PredictNext;
+        private System.Windows.Forms.Label label_chart_ScanFiles_Predict;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_PredictChartScale;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictChart_xMin;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictChart_yInterval;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictChart_yMin;
+        private System.Windows.Forms.TextBox textBox_ScanFiles_PredictChart_yMax;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_ScanFiles_Predict;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button_ScanFiles_Run;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_Parameters;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_Sensitivity;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_BatchSize;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_JudgementWindowSize;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_WindowSize;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_Threshold;
+        private System.Windows.Forms.GroupBox groupBox_ScanFiles_AverageSize;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton_ScanFiles_DetectionMode_Entire;
+        private System.Windows.Forms.RadioButton radioButton_ScanFiles_DetectionMode_Standard;
+        private System.Windows.Forms.Button button_ScanFiles_GetSrCnnParamFromPreview;
+        private System.Windows.Forms.CheckBox checkBox_ScanFiles_GetSrCnnParamFromPreview_Add;
+        private System.Windows.Forms.ProgressBar progressBar_ScanFiles;
+        private System.ComponentModel.BackgroundWorker backgroundWorker_ScanFiles_Run;
     }
 }
 

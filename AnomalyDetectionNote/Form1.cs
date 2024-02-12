@@ -18,86 +18,17 @@ namespace AnomalyDetectionNote
 {
     public partial class Form1 : Form
     {
-        TrackBarWithValue trackBarLabel_WindowSize;
-        TrackBarWithValue trackBarLabel_Threshold;
-        TrackBarWithValue trackBarLabel_AverageSize;
-        TrackBarWithValue trackBarLabel_JudgementWindowSize;
-        TrackBarWithValue trackBarLabel_BatchSize;
-        TrackBarWithValue trackBarLabel_Sensitivity;
 
-
-        TrackBarWithValue trackBarLabel_PreviewParameter_TrainChartScale;
-        TrackBarWithValue trackBarLabel_PreviewParameter_PredictChartScale;
 
         string thisExeDirPath;
-
 
 
         public Form1()
         {
             InitializeComponent();
-
-            //ModeCommonTrackbars
-            trackBarLabel_Threshold = new TrackBarWithValue(groupBox_Threshold);
-            trackBarLabel_Threshold.valueFactor = 0.02;
-            trackBarLabel_Threshold.Maximum = 1;
-            trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_Threshold.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-
-
-            //NormalModeTrackbars
-            trackBarLabel_WindowSize = new TrackBarWithValue(groupBox_WindowSize);
-            trackBarLabel_WindowSize.Maximum = 64;
-            trackBarLabel_WindowSize.Minimum = 1;
-            trackBarLabel_WindowSize.TickFrequency = 8;
-            trackBarLabel_WindowSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_WindowSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-
-            trackBarLabel_JudgementWindowSize = new TrackBarWithValue(groupBox_JudgementWindowSize);
-            trackBarLabel_JudgementWindowSize.Maximum = 64;
-            trackBarLabel_JudgementWindowSize.Minimum = 1;
-            trackBarLabel_JudgementWindowSize.TickFrequency = 8;
-            trackBarLabel_JudgementWindowSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_JudgementWindowSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-
-            trackBarLabel_AverageSize = new TrackBarWithValue(groupBox_AverageSize);
-            trackBarLabel_AverageSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_AverageSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_AverageSize.Minimum = 1;
-
-
-            //EntireModeTrackbars
-            groupBox_BatchSize.Location = groupBox_WindowSize.Location;
-            groupBox_Sensitivity.Location = groupBox_JudgementWindowSize.Location;
-
-            trackBarLabel_BatchSize = new TrackBarWithValue(groupBox_BatchSize);
-            trackBarLabel_BatchSize.Maximum = 1024;
-            trackBarLabel_BatchSize.Minimum = 12;
-            trackBarLabel_BatchSize.TickFrequency = 8;
-            trackBarLabel_BatchSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_BatchSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-
-            trackBarLabel_Sensitivity = new TrackBarWithValue(groupBox_Sensitivity);
-            trackBarLabel_Sensitivity.Maximum = 100;
-            trackBarLabel_Sensitivity.Minimum = 0;
-            trackBarLabel_Sensitivity.TickFrequency = 10;
-            trackBarLabel_Sensitivity.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_Sensitivity.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
-
-
-
-
-            //ChartScaleTrackbars
-            trackBarLabel_PreviewParameter_TrainChartScale = new TrackBarWithValue(groupBox_PreviewParameter_TrainChartScale);
-            trackBarLabel_PreviewParameter_TrainChartScale.trackBar.Scroll += new System.EventHandler(TrainChartScaleUpdate);
-            trackBarLabel_PreviewParameter_TrainChartScale.trackBar.ValueChanged += new System.EventHandler(TrainChartScaleUpdate);
-
-
-            trackBarLabel_PreviewParameter_PredictChartScale = new TrackBarWithValue(groupBox_PreviewParameter_PredictChartScale);
-            trackBarLabel_PreviewParameter_PredictChartScale.trackBar.Scroll += new System.EventHandler(PredictChartScaleUpdate);
-            trackBarLabel_PreviewParameter_PredictChartScale.trackBar.ValueChanged += new System.EventHandler(PredictChartScaleUpdate);
-
-
+            groupBoxLocation_Initialize();
+            trackBarLabel_Initiallize();
+            textBoxValue_Initialize();
 
             chart_PreviewParameter_Train.Legends.Clear();
 
@@ -151,7 +82,7 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_TrainFileArrayIndex < PreviewParameter_TrainFileArray.Length - 1) PreviewParameter_TrainFileArrayIndex++;
-            
+
 
             TrainChartUpdate();
 
@@ -168,7 +99,7 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             PreviewParameter_TrainFileArrayIndex--;
-            
+
 
             TrainChartUpdate();
 
@@ -183,7 +114,7 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_PredictFileArrayIndex < PreviewParameter_PredictFileArray.Length - 1) PreviewParameter_PredictFileArrayIndex++;
-            
+
 
             PredictChartUpdate();
 
@@ -201,7 +132,7 @@ namespace AnomalyDetectionNote
         {
             //Index Update
             if (PreviewParameter_PredictFileArrayIndex > 0) PreviewParameter_PredictFileArrayIndex--;
-           
+
 
             PredictChartUpdate();
 
@@ -357,7 +288,126 @@ namespace AnomalyDetectionNote
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Example();
+            // Example();
         }
+
+        private void button_ScanFiles_PredictPath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "DataFile|" + textBox_PreviewParameter_PredictFilename_SearchPattern.Text;
+            ofd.Title = "PredictFile";
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            textBox_ScanFiles_PredictPath.Text = ofd.FileName;
+
+        }
+
+        private void radioButton_ScanFiles_DetectionMode_Standard_CheckedChanged(object sender, EventArgs e)
+        {
+            bool Visible = ((RadioButton)sender).Checked;
+
+            groupBox_ScanFiles_WindowSize.Visible = Visible;
+            groupBox_ScanFiles_JudgementWindowSize.Visible = Visible;
+            groupBox_ScanFiles_AverageSize.Visible = Visible;
+            groupBox_ScanFiles_BatchSize.Visible = !Visible;
+            groupBox_ScanFiles_Sensitivity.Visible = !Visible;
+
+        }
+
+        private void radioButton_ScanFiles_DetectionMode_Entire_CheckedChanged(object sender, EventArgs e)
+        {
+            bool Visible = ((RadioButton)sender).Checked;
+
+            groupBox_ScanFiles_WindowSize.Visible = !Visible;
+            groupBox_ScanFiles_JudgementWindowSize.Visible = !Visible;
+            groupBox_ScanFiles_AverageSize.Visible = !Visible;
+            groupBox_ScanFiles_BatchSize.Visible = Visible;
+            groupBox_ScanFiles_Sensitivity.Visible = Visible;
+
+        }
+
+        private void button_ScanFiles_GetSrCnnParamFromPreview_Click(object sender, EventArgs e)
+        {
+            if (checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Checked)
+            {
+                textBoxValueList_WindowSize.AllText += "," + trackBarLabel_WindowSize.Value.ToString();
+                textBoxValueList_Threshold.AllText += "," + trackBarLabel_Threshold.Value.ToString();
+                textBoxValueList_AverageSize.AllText += "," + trackBarLabel_AverageSize.Value.ToString();
+                textBoxValueList_JudgementWindowSize.AllText += "," + trackBarLabel_JudgementWindowSize.Value.ToString();
+                textBoxValueList_BatchSize.AllText += "," + trackBarLabel_BatchSize.Value.ToString();
+
+            }
+            else
+            {
+                textBoxValueList_WindowSize.AllText = trackBarLabel_WindowSize.Value.ToString();
+                textBoxValueList_Threshold.AllText = trackBarLabel_Threshold.Value.ToString();
+                textBoxValueList_AverageSize.AllText = trackBarLabel_AverageSize.Value.ToString();
+                textBoxValueList_JudgementWindowSize.AllText = trackBarLabel_JudgementWindowSize.Value.ToString();
+                textBoxValueList_BatchSize.AllText = trackBarLabel_BatchSize.Value.ToString();
+                textBoxValueList_Sensitivity.AllText = trackBarLabel_Sensitivity.Value.ToString();
+
+            }
+        }
+
+
+
+
+        private void backgroundWorker_ScanFiles_Run_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            string[] ScanFiles = new string[] { "" };
+
+            string path = textBox_ScanFiles_PredictPath.Text;
+            string pattern = textBox_ScanFiles_PredictFilename_SearchPattern.Text;
+
+            if (File.Exists(path))
+            {
+                ScanFiles = new string[] { path };
+            }
+            else if (Directory.Exists(path))
+            {
+                ScanFiles = Directory.GetFiles(path, pattern, SearchOption.AllDirectories);
+            }
+
+            worker.ReportProgress(-1, ScanFiles.Length-1);
+            //progressBar_ScanFiles.Maximum = ScanFiles.Length;
+
+            if (ScanFiles[0] != "")
+            {
+                ScanFilesChartUpdate(ScanFiles, worker, e);
+            }
+
+        }
+
+        private void backgroundWorker_ScanFiles_Run_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage == -1) { progressBar_ScanFiles.Maximum = (int)e.UserState; }
+            else { progressBar_ScanFiles.Value = (int)e.UserState; }
+
+            tabPage_ScanFiles.Refresh();
+        }
+
+        private void backgroundWorker_ScanFiles_Run_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            button_ScanFiles_Run.Text = "Run";
+        }
+
+        private void button_ScanFiles_Run_Click(object sender, EventArgs e)
+        {
+            if (!backgroundWorker_ScanFiles_Run.IsBusy)
+            {
+                backgroundWorker_ScanFiles_Run.RunWorkerAsync();
+                button_ScanFiles_Run.Text = "Cancel";
+            }
+            else if (backgroundWorker_ScanFiles_Run.WorkerSupportsCancellation)
+            {
+                backgroundWorker_ScanFiles_Run.CancelAsync();
+                button_ScanFiles_Run.Text = "Run";
+            }
+
+        }
+
     }
 }
