@@ -49,6 +49,8 @@ namespace AnomalyDetectionNote
             chartArea.AxisX.ScaleView.Position = newPosition;
 
         }
+
+
         private void TrainChartUpdate(object sender = null, EventArgs e = null)
         {
             double PreviewParameter_TrainChartAreaAxisX_Size = double.NaN;
@@ -81,8 +83,10 @@ namespace AnomalyDetectionNote
 
         }
 
+
         private void PredictChartUpdate(object sender = null, EventArgs e = null)
         {
+            //ChartDrawingCondition
             double PreviewParameter_PredictChartAreaAxisX_Size = double.NaN;
             double PreviewParameter_PredictChartAreaAxisX_Position = double.NaN;
 
@@ -97,18 +101,48 @@ namespace AnomalyDetectionNote
             string yMax = textBox_PreviewParameter_PredictChart_yMax.Text;
             string yInterval = textBox_PreviewParameter_PredictChart_yInterval.Text;
 
+
+            //SR-CNN Parameter
             int windowSize = (int)trackBarLabel_WindowSize.Value;
+            int judgementWindowSize = (int)trackBarLabel_JudgementWindowSize.Value;
             int averageSize = (int)trackBarLabel_AverageSize.Value;
             double thresholdParam = trackBarLabel_Threshold.Value;
+
+            int batchSize = (int)(trackBarLabel_BatchSize.Value);
+            double sensitivity = trackBarLabel_Sensitivity.Value;
+
+
+            //Update TrackBarLabel_JudgementWindowSize
+            if (FormParamLoaded && judgementWindowSize > windowSize)
+            {
+                judgementWindowSize = windowSize;
+                trackBarLabel_JudgementWindowSize.Value = judgementWindowSize;
+            }
+            if (FormParamLoaded)
+            {
+                trackBarLabel_JudgementWindowSize.Maximum = windowSize;
+            }
+
 
             string filename = PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex];
 
             UpdateChart(chart_PreviewParameter_Predict, File.ReadAllLines(filename), trackBarLabel_PreviewParameter_PredictChartScale.trackBar, xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
 
-            TrainAndPredictGraphDraw(chart_PreviewParameter_Predict,
-               PreviewParameter_TrainFileArray, PreviewParameter_PredictFileArray[PreviewParameter_PredictFileArrayIndex],
-                windowSize: windowSize, thresholdParam: thresholdParam, averagingWindowSize: averageSize);
 
+            //Predict by SR-CNN
+            if (radioButton_PreviewParameter_DetectionMode_Standard.Checked)
+            {
+                TrainAndPredictGraphDraw(chart_PreviewParameter_Predict, PreviewParameter_TrainFileArray, filename,
+                    windowSize: windowSize, judgementWindowSize: judgementWindowSize, thresholdParam: thresholdParam, averagingWindowSize: averageSize);
+            }
+            else if (radioButton_PreviewParameter_DetectionMode_Entire.Checked)
+            {
+                PredictEntireGraphDraw(chart_PreviewParameter_Predict, filename,
+                    threshold: thresholdParam, batchSize: batchSize, sensitivity: sensitivity);
+            }
+
+
+            // ChartScaleUpdate
             if (!double.IsNaN(PreviewParameter_PredictChartAreaAxisX_Size))
             {
                 chart_PreviewParameter_Predict.ChartAreas[0].AxisX.ScaleView.Size = PreviewParameter_PredictChartAreaAxisX_Size;
@@ -122,21 +156,21 @@ namespace AnomalyDetectionNote
 
 
         private void TrainAndPredictGraphDraw(Chart PredictChart, string[] TrainFiles, string PredictFile,
-            int windowSize, double thresholdParam, int averagingWindowSize)
+            int windowSize, int judgementWindowSize, double thresholdParam, int averagingWindowSize)
         {
 
             MLContext mlContext = new MLContext();
             var pipeline = mlContext.Transforms.DetectAnomalyBySrCnn(outputColumnName: "Prediction", inputColumnName: "value",
-                windowSize: windowSize, judgementWindowSize: windowSize, threshold: thresholdParam, averagingWindowSize: averagingWindowSize);
+                windowSize: windowSize, judgementWindowSize: judgementWindowSize, threshold: thresholdParam, averagingWindowSize: averagingWindowSize);
 
-            List<TimeSeriesData> predictTimeSeries = getTimeSeriesDataList(File.ReadAllLines(PredictFile));
-            IDataView dataViewPredict = mlContext.Data.LoadFromEnumerable<TimeSeriesData>(predictTimeSeries);
+            List<TimeSeriesDataFloat> predictTimeSeries = getTimeSeriesDataFloatList(File.ReadAllLines(PredictFile));
+            IDataView dataViewPredict = mlContext.Data.LoadFromEnumerable(predictTimeSeries);
 
             foreach (var TrainFile in TrainFiles)
             {
 
-                List<TimeSeriesData> trainTimeSeries = getTimeSeriesDataList(File.ReadAllLines(TrainFile));
-                IDataView dataViewTrain = mlContext.Data.LoadFromEnumerable<TimeSeriesData>(trainTimeSeries);
+                List<TimeSeriesDataFloat> trainTimeSeries = getTimeSeriesDataFloatList(File.ReadAllLines(TrainFile));
+                IDataView dataViewTrain = mlContext.Data.LoadFromEnumerable(trainTimeSeries);
 
                 // Train model
                 var model = pipeline.Fit(dataViewTrain);
@@ -163,7 +197,7 @@ namespace AnomalyDetectionNote
                     {
 
                         anomalyCount++;
-                        TimeSeriesData t = predictTimeSeries[dataIndex];
+                        TimeSeriesDataFloat t = predictTimeSeries[dataIndex];
                         chartGraph_Point.Points.AddXY(t.time, t.value);
                         chartGraph_Point.Points.AddXY(t.time, RawScore * 10.0);
                         chartGraph_Point.Points.AddXY(t.time, Magnitude * 10.0);
@@ -177,16 +211,79 @@ namespace AnomalyDetectionNote
 
         }
 
-        private List<TimeSeriesData> getTimeSeriesDataList(string[] lines)
+
+
+        private void PredictEntireGraphDraw(Chart PredictChart, string PredictFile,
+           double threshold = 0.3, int batchSize = 512, double sensitivity = 90.0)
         {
-            var timeSeriesData = new List<TimeSeriesData>();
+
+            // Create a new ML context, for ML.NET operations. It can be used for
+            // exception tracking and logging, 
+            // as well as the source of randomness.
+            var mlContext = new MLContext();
+
+
+            // Convert data to IDataView.
+            List<TimeSeriesDataDouble> predictTimeSeries = getTimeSeriesDataDoubleList(File.ReadAllLines(PredictFile));
+            IDataView dataViewPredict = mlContext.Data.LoadFromEnumerable<TimeSeriesDataDouble>(predictTimeSeries);
+
+            if (batchSize < 12) batchSize = 12;
+            // Setup the detection arguments
+            string outputColumnName = nameof(TimeSeriesPrediction.Prediction);
+            string inputColumnName = nameof(TimeSeriesDataDouble.value);
+
+            // Do batch anomaly detection
+            var outputDataView = mlContext.AnomalyDetection.DetectEntireAnomalyBySrCnn(dataViewPredict, outputColumnName, inputColumnName,
+                threshold: threshold, batchSize: batchSize, sensitivity: sensitivity, detectMode: SrCnnDetectMode.AnomalyAndMargin);
+
+            // Getting the data of the newly created column as an IEnumerable of
+            // SrCnnAnomalyDetection.
+            var predictionColumn = mlContext.Data.CreateEnumerable<SrCnnAnomalyDetection>(
+                outputDataView, reuseRowObject: false);
+
+            Console.WriteLine("Index\tData\tAnomaly\tAnomalyScore\tMag\tExpectedValue\tBoundaryUnit\tUpperBoundary\tLowerBoundary");
+
+            Series chartGraph_Point = new Series(Path.GetFileNameWithoutExtension(PredictFile));
+            chartGraph_Point.ChartType = SeriesChartType.Point;
+
+            PredictChart.Series.Add(chartGraph_Point);
+
+            int anomalyCount = 0;
+            var predictions = predictionColumn.ToList();
+            for (int dataIndex = 0; dataIndex < predictions.Count; dataIndex++)
+            {
+                //Console.WriteLine(predictions[dataIndex].Prediction[0].ToString() + "\t" + predictions[dataIndex].Prediction[1].ToString() + "\t" + predictions[dataIndex].Prediction[2].ToString());
+                double AnomalyScore = predictions[dataIndex].Prediction[0];
+                double RawScore = predictions[dataIndex].Prediction[1];
+                double Magnitude = predictions[dataIndex].Prediction[2];
+
+                if ((predictions[dataIndex]).Prediction[0] > 0.3)
+                {
+
+                    anomalyCount++;
+                    TimeSeriesDataDouble t = predictTimeSeries[dataIndex];
+                    chartGraph_Point.Points.AddXY(t.time, t.value);
+                    chartGraph_Point.Points.AddXY(t.time, RawScore * 10.0);
+                    chartGraph_Point.Points.AddXY(t.time, Magnitude * 10.0);
+
+                    Console.WriteLine(t.time.ToString() + "\t" + t.value.ToString());
+                }
+            }
+
+
+        }
+
+
+        private List<TimeSeriesDataFloat> getTimeSeriesDataFloatList(string[] lines)
+        {
+            var timeSeriesData = new List<TimeSeriesDataFloat>();
 
             foreach (var line in lines)
             {
                 if (line.StartsWith("time")) continue;
 
                 var splitLine = line.Split(',');
-                timeSeriesData.Add(new TimeSeriesData
+                timeSeriesData.Add(new TimeSeriesDataFloat
                 {
                     time = int.Parse(splitLine[0]),
                     value = float.Parse(splitLine[1])
@@ -197,6 +294,26 @@ namespace AnomalyDetectionNote
 
         }
 
+
+        private List<TimeSeriesDataDouble> getTimeSeriesDataDoubleList(string[] lines)
+        {
+            var timeSeriesData = new List<TimeSeriesDataDouble>();
+
+            foreach (var line in lines)
+            {
+                if (line.StartsWith("time")) continue;
+
+                var splitLine = line.Split(',');
+                timeSeriesData.Add(new TimeSeriesDataDouble
+                {
+                    time = int.Parse(splitLine[0]),
+                    value = double.Parse(splitLine[1])
+                });
+            }
+
+            return timeSeriesData;
+
+        }
 
     }
 }

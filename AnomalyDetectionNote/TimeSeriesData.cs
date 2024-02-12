@@ -8,7 +8,10 @@ using Microsoft.ML.Data;
 
 namespace AnomalyDetectionNote
 {
-    class TimeSeriesData
+    /// <summary>
+    /// for DetectAnomalyBySrCnn
+    /// </summary>
+    class TimeSeriesDataFloat
     {
         [LoadColumn(0)]
         public int time;
@@ -16,4 +19,17 @@ namespace AnomalyDetectionNote
         [LoadColumn(1)]
         public float value;
     }
+
+    /// <summary>
+    /// for DetectEntireAnomalyBySrCnn
+    /// </summary>
+    class TimeSeriesDataDouble
+    {
+        [LoadColumn(0)]
+        public int time;
+
+        [LoadColumn(1)]
+        public double value;
+    }
+
 }

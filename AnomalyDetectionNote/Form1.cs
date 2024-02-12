@@ -21,36 +21,73 @@ namespace AnomalyDetectionNote
         TrackBarWithValue trackBarLabel_WindowSize;
         TrackBarWithValue trackBarLabel_Threshold;
         TrackBarWithValue trackBarLabel_AverageSize;
+        TrackBarWithValue trackBarLabel_JudgementWindowSize;
+        TrackBarWithValue trackBarLabel_BatchSize;
+        TrackBarWithValue trackBarLabel_Sensitivity;
+
+
         TrackBarWithValue trackBarLabel_PreviewParameter_TrainChartScale;
         TrackBarWithValue trackBarLabel_PreviewParameter_PredictChartScale;
 
         string thisExeDirPath;
 
+
+
         public Form1()
         {
             InitializeComponent();
 
+            //ModeCommonTrackbars
+            trackBarLabel_Threshold = new TrackBarWithValue(groupBox_Threshold);
+            trackBarLabel_Threshold.valueFactor = 0.02;
+            trackBarLabel_Threshold.Maximum = 1;
+            trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_Threshold.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
+
+
+            //NormalModeTrackbars
             trackBarLabel_WindowSize = new TrackBarWithValue(groupBox_WindowSize);
             trackBarLabel_WindowSize.Maximum = 64;
             trackBarLabel_WindowSize.Minimum = 1;
             trackBarLabel_WindowSize.TickFrequency = 8;
             trackBarLabel_WindowSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_WindowSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_WindowSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
 
-
-            trackBarLabel_Threshold = new TrackBarWithValue(groupBox_Threshold);
-            trackBarLabel_Threshold.valueFactor = 0.02;
-            trackBarLabel_Threshold.Maximum = 1;
-            trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_Threshold.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-
+            trackBarLabel_JudgementWindowSize = new TrackBarWithValue(groupBox_JudgementWindowSize);
+            trackBarLabel_JudgementWindowSize.Maximum = 64;
+            trackBarLabel_JudgementWindowSize.Minimum = 1;
+            trackBarLabel_JudgementWindowSize.TickFrequency = 8;
+            trackBarLabel_JudgementWindowSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_JudgementWindowSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
 
             trackBarLabel_AverageSize = new TrackBarWithValue(groupBox_AverageSize);
             trackBarLabel_AverageSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
-            trackBarLabel_AverageSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_AverageSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
             trackBarLabel_AverageSize.Minimum = 1;
 
 
+            //EntireModeTrackbars
+            groupBox_BatchSize.Location = groupBox_WindowSize.Location;
+            groupBox_Sensitivity.Location = groupBox_JudgementWindowSize.Location;
+
+            trackBarLabel_BatchSize = new TrackBarWithValue(groupBox_BatchSize);
+            trackBarLabel_BatchSize.Maximum = 1024;
+            trackBarLabel_BatchSize.Minimum = 12;
+            trackBarLabel_BatchSize.TickFrequency = 8;
+            trackBarLabel_BatchSize.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_BatchSize.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
+
+            trackBarLabel_Sensitivity = new TrackBarWithValue(groupBox_Sensitivity);
+            trackBarLabel_Sensitivity.Maximum = 100;
+            trackBarLabel_Sensitivity.Minimum = 0;
+            trackBarLabel_Sensitivity.TickFrequency = 10;
+            trackBarLabel_Sensitivity.trackBar.Scroll += new System.EventHandler(PredictChartUpdate);
+            trackBarLabel_Sensitivity.trackBar.ValueChanged += new System.EventHandler(PredictChartUpdate);
+
+
+
+
+            //ChartScaleTrackbars
             trackBarLabel_PreviewParameter_TrainChartScale = new TrackBarWithValue(groupBox_PreviewParameter_TrainChartScale);
             trackBarLabel_PreviewParameter_TrainChartScale.trackBar.Scroll += new System.EventHandler(TrainChartScaleUpdate);
             trackBarLabel_PreviewParameter_TrainChartScale.trackBar.ValueChanged += new System.EventHandler(TrainChartScaleUpdate);
@@ -68,7 +105,7 @@ namespace AnomalyDetectionNote
 
 
         }
-
+        bool FormParamLoaded = false;
         private void Form1_Load(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -86,6 +123,7 @@ namespace AnomalyDetectionNote
                 }
             }
 
+            FormParamLoaded = true;
         }
 
 
@@ -286,5 +324,40 @@ namespace AnomalyDetectionNote
 
         #endregion
 
+        private void radioButton_PreviewParameter_DetectionMode_Standard_CheckedChanged(object sender, EventArgs e)
+        {
+            bool Visible = ((RadioButton)sender).Checked;
+
+
+            groupBox_BatchSize.Visible = !Visible;
+            groupBox_Sensitivity.Visible = !Visible;
+
+            groupBox_AverageSize.Visible = Visible;
+            groupBox_JudgementWindowSize.Visible = Visible;
+            groupBox_WindowSize.Visible = Visible;
+
+
+            PredictChartUpdate();
+        }
+
+        private void radioButton_PreviewParameter_DetectionMode_Entire_CheckedChanged(object sender, EventArgs e)
+        {
+            bool Visible = ((RadioButton)sender).Checked;
+
+            groupBox_BatchSize.Visible = Visible;
+            groupBox_Sensitivity.Visible = Visible;
+
+            groupBox_AverageSize.Visible = !Visible;
+            groupBox_JudgementWindowSize.Visible = !Visible;
+            groupBox_WindowSize.Visible = !Visible;
+
+
+            PredictChartUpdate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Example();
+        }
     }
 }

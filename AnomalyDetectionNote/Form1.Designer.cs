@@ -37,7 +37,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_PreviewParameter_DetectionMode = new System.Windows.Forms.GroupBox();
+            this.radioButton_PreviewParameter_DetectionMode_Entire = new System.Windows.Forms.RadioButton();
+            this.radioButton_PreviewParameter_DetectionMode_Standard = new System.Windows.Forms.RadioButton();
+            this.groupBox_PreviewParameters = new System.Windows.Forms.GroupBox();
+            this.groupBox_Sensitivity = new System.Windows.Forms.GroupBox();
+            this.groupBox_BatchSize = new System.Windows.Forms.GroupBox();
+            this.groupBox_JudgementWindowSize = new System.Windows.Forms.GroupBox();
             this.groupBox_WindowSize = new System.Windows.Forms.GroupBox();
             this.groupBox_Threshold = new System.Windows.Forms.GroupBox();
             this.groupBox_AverageSize = new System.Windows.Forms.GroupBox();
@@ -74,9 +80,11 @@
             this.label_PreviewParameter_Chart_Max = new System.Windows.Forms.Label();
             this.label_PreviewParameter_TargetFilename = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox_PreviewParameter_DetectionMode.SuspendLayout();
+            this.groupBox_PreviewParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Predict)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Train)).BeginInit();
             this.SuspendLayout();
@@ -103,7 +111,9 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.groupBox_PreviewParameter_DetectionMode);
+            this.tabPage2.Controls.Add(this.groupBox_PreviewParameters);
             this.tabPage2.Controls.Add(this.button_PreviewParameter_PredictPrev);
             this.tabPage2.Controls.Add(this.button_PreviewParameter_TrainPrev);
             this.tabPage2.Controls.Add(this.button_PreviewParameter_PredictNext);
@@ -143,21 +153,84 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "PreviewParameter";
             // 
-            // groupBox1
+            // groupBox_PreviewParameter_DetectionMode
             // 
-            this.groupBox1.Controls.Add(this.groupBox_WindowSize);
-            this.groupBox1.Controls.Add(this.groupBox_Threshold);
-            this.groupBox1.Controls.Add(this.groupBox_AverageSize);
-            this.groupBox1.Location = new System.Drawing.Point(10, 111);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(332, 353);
-            this.groupBox1.TabIndex = 31;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "SR-CNN Parameter";
+            this.groupBox_PreviewParameter_DetectionMode.Controls.Add(this.radioButton_PreviewParameter_DetectionMode_Entire);
+            this.groupBox_PreviewParameter_DetectionMode.Controls.Add(this.radioButton_PreviewParameter_DetectionMode_Standard);
+            this.groupBox_PreviewParameter_DetectionMode.Location = new System.Drawing.Point(10, 700);
+            this.groupBox_PreviewParameter_DetectionMode.Name = "groupBox_PreviewParameter_DetectionMode";
+            this.groupBox_PreviewParameter_DetectionMode.Size = new System.Drawing.Size(332, 53);
+            this.groupBox_PreviewParameter_DetectionMode.TabIndex = 32;
+            this.groupBox_PreviewParameter_DetectionMode.TabStop = false;
+            this.groupBox_PreviewParameter_DetectionMode.Text = "DetectionMode";
+            // 
+            // radioButton_PreviewParameter_DetectionMode_Entire
+            // 
+            this.radioButton_PreviewParameter_DetectionMode_Entire.AutoSize = true;
+            this.radioButton_PreviewParameter_DetectionMode_Entire.Location = new System.Drawing.Point(162, 21);
+            this.radioButton_PreviewParameter_DetectionMode_Entire.Name = "radioButton_PreviewParameter_DetectionMode_Entire";
+            this.radioButton_PreviewParameter_DetectionMode_Entire.Size = new System.Drawing.Size(65, 19);
+            this.radioButton_PreviewParameter_DetectionMode_Entire.TabIndex = 1;
+            this.radioButton_PreviewParameter_DetectionMode_Entire.Text = "Entire";
+            this.radioButton_PreviewParameter_DetectionMode_Entire.UseVisualStyleBackColor = true;
+            this.radioButton_PreviewParameter_DetectionMode_Entire.CheckedChanged += new System.EventHandler(this.radioButton_PreviewParameter_DetectionMode_Entire_CheckedChanged);
+            // 
+            // radioButton_PreviewParameter_DetectionMode_Standard
+            // 
+            this.radioButton_PreviewParameter_DetectionMode_Standard.AutoSize = true;
+            this.radioButton_PreviewParameter_DetectionMode_Standard.Location = new System.Drawing.Point(6, 21);
+            this.radioButton_PreviewParameter_DetectionMode_Standard.Name = "radioButton_PreviewParameter_DetectionMode_Standard";
+            this.radioButton_PreviewParameter_DetectionMode_Standard.Size = new System.Drawing.Size(83, 19);
+            this.radioButton_PreviewParameter_DetectionMode_Standard.TabIndex = 0;
+            this.radioButton_PreviewParameter_DetectionMode_Standard.Text = "Standard";
+            this.radioButton_PreviewParameter_DetectionMode_Standard.UseVisualStyleBackColor = true;
+            this.radioButton_PreviewParameter_DetectionMode_Standard.CheckedChanged += new System.EventHandler(this.radioButton_PreviewParameter_DetectionMode_Standard_CheckedChanged);
+            // 
+            // groupBox_PreviewParameters
+            // 
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_Sensitivity);
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_BatchSize);
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_JudgementWindowSize);
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_WindowSize);
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_Threshold);
+            this.groupBox_PreviewParameters.Controls.Add(this.groupBox_AverageSize);
+            this.groupBox_PreviewParameters.Location = new System.Drawing.Point(10, 111);
+            this.groupBox_PreviewParameters.Name = "groupBox_PreviewParameters";
+            this.groupBox_PreviewParameters.Size = new System.Drawing.Size(332, 583);
+            this.groupBox_PreviewParameters.TabIndex = 31;
+            this.groupBox_PreviewParameters.TabStop = false;
+            this.groupBox_PreviewParameters.Text = "SR-CNN Parameter";
+            // 
+            // groupBox_Sensitivity
+            // 
+            this.groupBox_Sensitivity.Location = new System.Drawing.Point(18, 485);
+            this.groupBox_Sensitivity.Name = "groupBox_Sensitivity";
+            this.groupBox_Sensitivity.Size = new System.Drawing.Size(300, 80);
+            this.groupBox_Sensitivity.TabIndex = 24;
+            this.groupBox_Sensitivity.TabStop = false;
+            this.groupBox_Sensitivity.Text = "Sensitivity";
+            // 
+            // groupBox_BatchSize
+            // 
+            this.groupBox_BatchSize.Location = new System.Drawing.Point(18, 393);
+            this.groupBox_BatchSize.Name = "groupBox_BatchSize";
+            this.groupBox_BatchSize.Size = new System.Drawing.Size(300, 80);
+            this.groupBox_BatchSize.TabIndex = 24;
+            this.groupBox_BatchSize.TabStop = false;
+            this.groupBox_BatchSize.Text = "BatchSize";
+            // 
+            // groupBox_JudgementWindowSize
+            // 
+            this.groupBox_JudgementWindowSize.Location = new System.Drawing.Point(18, 212);
+            this.groupBox_JudgementWindowSize.Name = "groupBox_JudgementWindowSize";
+            this.groupBox_JudgementWindowSize.Size = new System.Drawing.Size(300, 80);
+            this.groupBox_JudgementWindowSize.TabIndex = 23;
+            this.groupBox_JudgementWindowSize.TabStop = false;
+            this.groupBox_JudgementWindowSize.Text = "JudgementWindowSize";
             // 
             // groupBox_WindowSize
             // 
-            this.groupBox_WindowSize.Location = new System.Drawing.Point(18, 22);
+            this.groupBox_WindowSize.Location = new System.Drawing.Point(18, 114);
             this.groupBox_WindowSize.Name = "groupBox_WindowSize";
             this.groupBox_WindowSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_WindowSize.TabIndex = 22;
@@ -166,7 +239,7 @@
             // 
             // groupBox_Threshold
             // 
-            this.groupBox_Threshold.Location = new System.Drawing.Point(18, 134);
+            this.groupBox_Threshold.Location = new System.Drawing.Point(18, 21);
             this.groupBox_Threshold.Name = "groupBox_Threshold";
             this.groupBox_Threshold.Size = new System.Drawing.Size(300, 80);
             this.groupBox_Threshold.TabIndex = 22;
@@ -175,7 +248,7 @@
             // 
             // groupBox_AverageSize
             // 
-            this.groupBox_AverageSize.Location = new System.Drawing.Point(18, 236);
+            this.groupBox_AverageSize.Location = new System.Drawing.Point(18, 307);
             this.groupBox_AverageSize.Name = "groupBox_AverageSize";
             this.groupBox_AverageSize.Size = new System.Drawing.Size(300, 80);
             this.groupBox_AverageSize.TabIndex = 22;
@@ -479,8 +552,18 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1162, 759);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "SearchParameter";
+            this.tabPage1.Text = "EntireDataDitection";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(370, 695);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 26);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -496,7 +579,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox_PreviewParameter_DetectionMode.ResumeLayout(false);
+            this.groupBox_PreviewParameter_DetectionMode.PerformLayout();
+            this.groupBox_PreviewParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Predict)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_PreviewParameter_Train)).EndInit();
             this.ResumeLayout(false);
@@ -529,7 +614,7 @@
         private System.Windows.Forms.TextBox textBox_PreviewParameter_TrainChart_xMin;
         private System.Windows.Forms.TextBox textBox_PreviewParameter_TrainChart_yInterval;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_PreviewParameters;
         private System.Windows.Forms.Button button_PreviewParameter_PredictPrev;
         private System.Windows.Forms.Button button_PreviewParameter_PredictNext;
         private System.Windows.Forms.TextBox textBox_PreviewParameter_PredictFilename_SearchPattern;
@@ -546,6 +631,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox_JudgementWindowSize;
+        private System.Windows.Forms.GroupBox groupBox_PreviewParameter_DetectionMode;
+        private System.Windows.Forms.RadioButton radioButton_PreviewParameter_DetectionMode_Entire;
+        private System.Windows.Forms.RadioButton radioButton_PreviewParameter_DetectionMode_Standard;
+        private System.Windows.Forms.GroupBox groupBox_BatchSize;
+        private System.Windows.Forms.GroupBox groupBox_Sensitivity;
+        private System.Windows.Forms.Button button1;
     }
 }
 
