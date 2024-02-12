@@ -267,7 +267,14 @@ namespace AnomalyDetectionNote
             groupBox_JudgementWindowSize.Visible = Visible;
             groupBox_WindowSize.Visible = Visible;
 
-
+            if (radioButton_ScanFiles_DetectionMode_Standard.Checked != Visible)
+            {
+                radioButton_ScanFiles_DetectionMode_Standard.Checked = Visible;
+            }
+            else
+            {
+                
+            }
             PredictChartUpdate();
         }
 
@@ -282,7 +289,14 @@ namespace AnomalyDetectionNote
             groupBox_JudgementWindowSize.Visible = !Visible;
             groupBox_WindowSize.Visible = !Visible;
 
-
+            if (radioButton_ScanFiles_DetectionMode_Entire.Checked != Visible)
+            {
+                radioButton_ScanFiles_DetectionMode_Entire.Checked = Visible;
+            }
+            else
+            {
+               
+            }
             PredictChartUpdate();
         }
 
@@ -313,6 +327,10 @@ namespace AnomalyDetectionNote
             groupBox_ScanFiles_BatchSize.Visible = !Visible;
             groupBox_ScanFiles_Sensitivity.Visible = !Visible;
 
+            if (radioButton_PreviewParameter_DetectionMode_Standard.Checked != Visible)
+            {
+                radioButton_PreviewParameter_DetectionMode_Standard.Checked = Visible;
+            }
         }
 
         private void radioButton_ScanFiles_DetectionMode_Entire_CheckedChanged(object sender, EventArgs e)
@@ -325,6 +343,10 @@ namespace AnomalyDetectionNote
             groupBox_ScanFiles_BatchSize.Visible = Visible;
             groupBox_ScanFiles_Sensitivity.Visible = Visible;
 
+            if (radioButton_PreviewParameter_DetectionMode_Entire.Checked != Visible)
+            {
+                radioButton_PreviewParameter_DetectionMode_Entire.Checked = Visible;
+            }
         }
 
         private void button_ScanFiles_GetSrCnnParamFromPreview_Click(object sender, EventArgs e)
@@ -357,11 +379,10 @@ namespace AnomalyDetectionNote
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            string[] ScanFiles = new string[] { "" };
-
             string path = textBox_ScanFiles_PredictPath.Text;
             string pattern = textBox_ScanFiles_PredictFilename_SearchPattern.Text;
 
+            string[] ScanFiles = new string[] { "" };
             if (File.Exists(path))
             {
                 ScanFiles = new string[] { path };
@@ -371,12 +392,12 @@ namespace AnomalyDetectionNote
                 ScanFiles = Directory.GetFiles(path, pattern, SearchOption.AllDirectories);
             }
 
-            worker.ReportProgress(-1, ScanFiles.Length-1);
-            //progressBar_ScanFiles.Maximum = ScanFiles.Length;
+            worker.ReportProgress(-1, ScanFiles.Length - 1); //progressBar_ScanFiles.Maximum = ScanFiles.Length;
+
 
             if (ScanFiles[0] != "")
             {
-                ScanFilesChartUpdate(ScanFiles, worker, e);
+                ScanFilesRunChartUpdate(ScanFiles, worker, e);
             }
 
         }
@@ -384,7 +405,14 @@ namespace AnomalyDetectionNote
         private void backgroundWorker_ScanFiles_Run_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage == -1) { progressBar_ScanFiles.Maximum = (int)e.UserState; }
-            else { progressBar_ScanFiles.Value = (int)e.UserState; }
+            else
+            {
+                int progressIndex = (int)e.UserState;
+                int progressMax = progressBar_ScanFiles.Maximum;
+                progressBar_ScanFiles.Value = progressIndex;
+                label_ScanFiles_Index.Text = (progressIndex + 1).ToString() + " / " + (progressMax + 1).ToString();
+
+            }
 
             tabPage_ScanFiles.Refresh();
         }
@@ -392,12 +420,31 @@ namespace AnomalyDetectionNote
         private void backgroundWorker_ScanFiles_Run_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             button_ScanFiles_Run.Text = "Run";
+
+            if (Directory.Exists(Path.GetDirectoryName(ScanFiles_Run_SaveFilename)))
+            {
+                File.WriteAllLines(ScanFiles_Run_SaveFilename, ScanFiles_Run_SaveDataList);
+
+            }
+
         }
 
+        string ScanFiles_Run_SaveFilename = "";
+        List<string> ScanFiles_Run_SaveDataList;
         private void button_ScanFiles_Run_Click(object sender, EventArgs e)
         {
             if (!backgroundWorker_ScanFiles_Run.IsBusy)
             {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "TEXT|*.txt";
+                sfd.FileName = Path.GetFileNameWithoutExtension(textBox_ScanFiles_PredictPath.Text.TrimEnd('/').TrimEnd('\\'));
+
+                if (sfd.ShowDialog() != DialogResult.OK) return;
+                ScanFiles_Run_SaveFilename = sfd.FileName;
+
+                ScanFiles_Run_SaveDataList = new List<string>();
+                ScanFiles_Run_SaveDataList.Add( CreateSaveDataListHeader());
+
                 backgroundWorker_ScanFiles_Run.RunWorkerAsync();
                 button_ScanFiles_Run.Text = "Cancel";
             }
@@ -406,6 +453,7 @@ namespace AnomalyDetectionNote
                 backgroundWorker_ScanFiles_Run.CancelAsync();
                 button_ScanFiles_Run.Text = "Run";
             }
+
 
         }
 

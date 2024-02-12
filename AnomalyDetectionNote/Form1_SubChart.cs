@@ -31,7 +31,7 @@ namespace AnomalyDetectionNote
             if (chart.InvokeRequired)
             {
 
-                Invoke(new UpdateChartDelegate(UpdateChart), 
+                Invoke(new UpdateChartDelegate(UpdateChart),
                     new object[] { chart, lines, ScaleTrackBar, separateChar,
                         xMin, xMax, xInterval, yMin, yMax, yInterval, seriesName, scaleStep });
                 return;
@@ -244,11 +244,13 @@ namespace AnomalyDetectionNote
         private void TrainAndPredictGraphDraw(Chart PredictChart, string[] TrainFiles, string PredictFile,
             int windowSize, int judgementWindowSize, double thresholdParam, int averagingWindowSize)
         {
+            bool textFileOut = ScanFiles_Run_SaveFilename!="" && Directory.Exists(Path.GetDirectoryName(ScanFiles_Run_SaveFilename));
+
             if (PredictChart.InvokeRequired)
             {
 
                 Invoke(new TrainAndPredictGraphDrawDelegate(TrainAndPredictGraphDraw),
-                    new object[] {PredictChart, TrainFiles, PredictFile, windowSize, judgementWindowSize, thresholdParam, averagingWindowSize });
+                    new object[] { PredictChart, TrainFiles, PredictFile, windowSize, judgementWindowSize, thresholdParam, averagingWindowSize });
                 return;
             };
 
@@ -259,9 +261,14 @@ namespace AnomalyDetectionNote
             List<TimeSeriesDataFloat> predictTimeSeries = getTimeSeriesDataFloatList(File.ReadAllLines(PredictFile));
             IDataView dataViewPredict = mlContext.Data.LoadFromEnumerable(predictTimeSeries);
 
+            List<double> List_RawScore = new List<double>();
+            List<double> List_Magnitude = new List<double>();
+            List<double> List_RowData = new List<double>();
+            List<double> List_BackData = new List<double>();
+
+
             foreach (var TrainFile in TrainFiles)
             {
-
                 List<TimeSeriesDataFloat> trainTimeSeries = getTimeSeriesDataFloatList(File.ReadAllLines(TrainFile));
                 IDataView dataViewTrain = mlContext.Data.LoadFromEnumerable(trainTimeSeries);
 
@@ -286,7 +293,10 @@ namespace AnomalyDetectionNote
                     double RawScore = predictions[dataIndex].Prediction[1];
                     double Magnitude = predictions[dataIndex].Prediction[2];
 
-                    if ((predictions[dataIndex]).Prediction[0] > 0.3)
+                    List_RawScore.Add(RawScore);
+                    List_RowData.Add(predictTimeSeries[dataIndex].value);
+
+                    if ((predictions[dataIndex]).Prediction[0] > thresholdParam)
                     {
 
                         anomalyCount++;
@@ -296,12 +306,71 @@ namespace AnomalyDetectionNote
                         chartGraph_Point.Points.AddXY(t.time, Magnitude * 10.0);
 
                         Console.WriteLine(t.time.ToString() + "\t" + t.value.ToString());
+
+                        List_Magnitude.Add(Magnitude);
+
                     }
+                    else
+                    {
+                        List_BackData.Add(predictTimeSeries[dataIndex].value);
+                    }
+
                 }
                 Console.WriteLine("anomalyCount : " + anomalyCount.ToString());
 
+
             }
 
+
+            if (textFileOut)
+            {
+                List<string> colList = new List<string>();
+
+                colList.Add(Path.GetFileNameWithoutExtension(PredictFile));
+                colList.Add(List_Magnitude.Count().ToString());
+
+                //List_RawScore
+                double List_RawScore_Average = List_RawScore.Average();
+                double List_RawScore_StDev = StDev(List_RawScore, List_RawScore_Average);
+                colList.Add(List_RawScore.Max().ToString());
+                colList.Add(List_RawScore.Min().ToString());
+                colList.Add(List_RawScore_Average.ToString());
+                colList.Add(List_RawScore_StDev.ToString());
+
+                //List_Magnitude
+                double List_Magnitude_Average = List_Magnitude.Average();
+                double List_Magnitude_StDev = StDev(List_Magnitude, List_Magnitude_Average);
+                colList.Add(List_Magnitude.Max().ToString());
+                colList.Add(List_Magnitude.Min().ToString());
+                colList.Add(List_Magnitude_Average.ToString());
+                colList.Add(List_Magnitude_StDev.ToString());
+
+                // List_RowData
+                double List_RowData_Average = List_RowData.Average();
+                double List_RowData_StDev = StDev(List_RowData, List_RowData_Average);
+                colList.Add(List_RowData.Max().ToString());
+                colList.Add(List_RowData.Min().ToString());
+                colList.Add(List_RowData_Average.ToString());
+                colList.Add(List_RowData_StDev.ToString());
+
+                // List_BackData
+                double List_BackData_Average = List_BackData.Average();
+                double List_BackData_StDev = StDev(List_BackData, List_BackData_Average);
+                colList.Add(List_BackData.Max().ToString());
+                colList.Add(List_BackData.Min().ToString());
+                colList.Add(List_BackData_Average.ToString());
+                colList.Add(List_BackData_StDev.ToString());
+
+
+                ScanFiles_Run_SaveDataList.Add(string.Join("\t", colList.ToArray()));
+            }
+
+        }
+
+        private double StDev(List<double> data, double average)
+        {
+            double sumOfSquaresOfDifferences = data.Select(val => (val - average) * (val - average)).Sum();
+            return Math.Sqrt(sumOfSquaresOfDifferences / data.Count);
         }
 
 
@@ -311,6 +380,7 @@ namespace AnomalyDetectionNote
         private void PredictEntireGraphDraw(Chart PredictChart, string PredictFile,
            double threshold = 0.3, int batchSize = 512, double sensitivity = 90.0)
         {
+            bool textFileOut = ScanFiles_Run_SaveFilename != "" && Directory.Exists(Path.GetDirectoryName(ScanFiles_Run_SaveFilename));
 
             if (PredictChart.InvokeRequired)
             {
@@ -345,6 +415,14 @@ namespace AnomalyDetectionNote
 
             Console.WriteLine("Index\tData\tAnomaly\tAnomalyScore\tMag\tExpectedValue\tBoundaryUnit\tUpperBoundary\tLowerBoundary");
 
+
+            List<double> List_RawScore = new List<double>();
+            List<double> List_Magnitude = new List<double>();
+            List<double> List_RowData = new List<double>();
+            List<double> List_BackData = new List<double>();
+
+
+
             Series chartGraph_Point = new Series(Path.GetFileNameWithoutExtension(PredictFile));
             chartGraph_Point.ChartType = SeriesChartType.Point;
 
@@ -359,7 +437,10 @@ namespace AnomalyDetectionNote
                 double RawScore = predictions[dataIndex].Prediction[1];
                 double Magnitude = predictions[dataIndex].Prediction[2];
 
-                if ((predictions[dataIndex]).Prediction[0] > 0.3)
+                List_RawScore.Add(RawScore);
+                List_RowData.Add(predictTimeSeries[dataIndex].value);
+
+                if ((predictions[dataIndex]).Prediction[0] > threshold)
                 {
 
                     anomalyCount++;
@@ -369,25 +450,112 @@ namespace AnomalyDetectionNote
                     chartGraph_Point.Points.AddXY(t.time, Magnitude * 10.0);
 
                     Console.WriteLine(t.time.ToString() + "\t" + t.value.ToString());
+
+                    List_Magnitude.Add(Magnitude);
+
+                }
+                else
+                {
+                    List_BackData.Add(predictTimeSeries[dataIndex].value);
                 }
             }
 
 
+
+            if (textFileOut)
+            {
+                List<string> colList = new List<string>();
+
+                colList.Add(Path.GetFileNameWithoutExtension(PredictFile));
+                colList.Add(List_Magnitude.Count().ToString());
+
+                //List_RawScore
+                double List_RawScore_Average = List_RawScore.Average();
+                double List_RawScore_StDev = StDev(List_RawScore, List_RawScore_Average);
+                colList.Add(List_RawScore.Max().ToString());
+                colList.Add(List_RawScore.Min().ToString());
+                colList.Add(List_RawScore_Average.ToString());
+                colList.Add(List_RawScore_StDev.ToString());
+
+                //List_Magnitude
+                double List_Magnitude_Average = List_Magnitude.Average();
+                double List_Magnitude_StDev = StDev(List_Magnitude, List_Magnitude_Average);
+                colList.Add(List_Magnitude.Max().ToString());
+                colList.Add(List_Magnitude.Min().ToString());
+                colList.Add(List_Magnitude_Average.ToString());
+                colList.Add(List_Magnitude_StDev.ToString());
+
+                // List_RowData
+                double List_RowData_Average = List_RowData.Average();
+                double List_RowData_StDev = StDev(List_RowData, List_RowData_Average);
+                colList.Add(List_RowData.Max().ToString());
+                colList.Add(List_RowData.Min().ToString());
+                colList.Add(List_RowData_Average.ToString());
+                colList.Add(List_RowData_StDev.ToString());
+
+                // List_BackData
+                double List_BackData_Average = List_BackData.Average();
+                double List_BackData_StDev = StDev(List_BackData, List_BackData_Average);
+                colList.Add(List_BackData.Max().ToString());
+                colList.Add(List_BackData.Min().ToString());
+                colList.Add(List_BackData_Average.ToString());
+                colList.Add(List_BackData_StDev.ToString());
+
+
+                ScanFiles_Run_SaveDataList.Add(string.Join("\t", colList.ToArray()));
+            }
+
         }
 
-        private delegate void ScanFilesChartUpdateDelegate(string[] FilenameArray, BackgroundWorker worker, DoWorkEventArgs e);
-
-        private void ScanFilesChartUpdate(string[] FilenameArray, BackgroundWorker worker, DoWorkEventArgs e)
+        string CreateSaveDataListHeader()
         {
 
+                List<string> colList = new List<string>();
+
+                colList.Add("Filename");
+                colList.Add("AnomalyCount");
+
+                //RawScore
+                colList.Add("RawScore_Max");
+                colList.Add("RawScore_Min");
+                colList.Add("RawScore_Average");
+                colList.Add("RawScore_StDev");
+
+                //Magnitude
+                colList.Add("Magnitude_Max");
+                colList.Add("Magnitude_Min");
+                colList.Add("Magnitude_Average");
+                colList.Add("Magnitude_StDev");
+
+                // RowData
+               
+                colList.Add("RowData_Max");
+                colList.Add("RowData_Min");
+                colList.Add("RowData_Average");
+                colList.Add("RowData_StDev");
+
+                // "BackData
+                colList.Add("BackData_Max");
+                colList.Add("BackData_Min");
+                colList.Add("BackData_Average");
+                colList.Add("BackData_StDev");
+
+
+               return (string.Join("\t", colList.ToArray()));
+
+        }
+
+        private delegate void ScanFilesRunChartUpdateDelegate(string[] FilenameArray, BackgroundWorker worker, DoWorkEventArgs e);
+
+        private void ScanFilesRunChartUpdate(string[] FilenameArray, BackgroundWorker worker, DoWorkEventArgs e)
+        {
 
             if (chart_ScanFiles_Predict.InvokeRequired)
             {
-                Invoke(new ScanFilesChartUpdateDelegate(ScanFilesChartUpdate),
-                    new object[] { FilenameArray, worker,e });
+                Invoke(new ScanFilesRunChartUpdateDelegate(ScanFilesRunChartUpdate),
+                    new object[] { FilenameArray, worker, e });
                 return;
             };
-
 
             //ChartDrawingCondition
             double ScanFiles_ChartAreaAxisX_Size = double.NaN;
@@ -419,11 +587,9 @@ namespace AnomalyDetectionNote
             if (judgementWindowSize > windowSize)
             {
                 judgementWindowSize = windowSize;
-
             }
 
-
-
+            //ScanFiles
             for (int filenameIndex = 0; filenameIndex < FilenameArray.Length; filenameIndex++)
             {
                 worker.ReportProgress(1, filenameIndex);
@@ -435,7 +601,7 @@ namespace AnomalyDetectionNote
                 string filename = FilenameArray[filenameIndex];
 
                 UpdateChart(chart_ScanFiles_Predict, File.ReadAllLines(filename),
-                    trackBarLabel_PreviewParameter_ScanFiles_PredictChartScale.trackBar, 
+                    trackBarLabel_PreviewParameter_ScanFiles_PredictChartScale.trackBar,
                     xMin: xMin, yMin: yMin, yMax: yMax, yInterval: yInterval);
 
 
@@ -463,10 +629,10 @@ namespace AnomalyDetectionNote
                     chart_ScanFiles_Predict.ChartAreas[0].AxisX.ScaleView.Position = ScanFiles_ChartAreaAxisX_Position;
                 };
 
-                string imageSavename = Path.Combine(Path.GetDirectoryName(filename),"chart",Path.GetFileNameWithoutExtension(filename)+".png");
+                string imageSavename = Path.Combine(Path.GetDirectoryName(filename), "chart", Path.GetFileNameWithoutExtension(filename) + ".png");
                 if (!Directory.Exists(Path.GetDirectoryName(imageSavename))) { Directory.CreateDirectory(Path.GetDirectoryName(imageSavename)); };
 
-                chart_ScanFiles_Predict.SaveImage(imageSavename,ChartImageFormat.Png);
+                chart_ScanFiles_Predict.SaveImage(imageSavename, ChartImageFormat.Png);
 
             }
 

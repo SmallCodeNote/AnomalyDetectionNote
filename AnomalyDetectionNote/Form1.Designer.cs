@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_PreviewParameter = new System.Windows.Forms.TabPage();
@@ -84,9 +84,13 @@
             this.label_PreviewParameter_Chart_Max = new System.Windows.Forms.Label();
             this.label_PreviewParameter_TargetFilename = new System.Windows.Forms.Label();
             this.tabPage_ScanFiles = new System.Windows.Forms.TabPage();
+            this.label_ScanFiles_Index = new System.Windows.Forms.Label();
+            this.progressBar_ScanFiles = new System.Windows.Forms.ProgressBar();
             this.groupBox_ScanFiles_Parameters = new System.Windows.Forms.GroupBox();
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add = new System.Windows.Forms.CheckBox();
             this.groupBox_ScanFiles_Sensitivity = new System.Windows.Forms.GroupBox();
             this.groupBox_ScanFiles_BatchSize = new System.Windows.Forms.GroupBox();
+            this.button_ScanFiles_GetSrCnnParamFromPreview = new System.Windows.Forms.Button();
             this.groupBox_ScanFiles_JudgementWindowSize = new System.Windows.Forms.GroupBox();
             this.groupBox_ScanFiles_WindowSize = new System.Windows.Forms.GroupBox();
             this.groupBox_ScanFiles_Threshold = new System.Windows.Forms.GroupBox();
@@ -112,9 +116,6 @@
             this.textBox_ScanFiles_PredictPath = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage_CreateDammyData = new System.Windows.Forms.TabPage();
-            this.button_ScanFiles_GetSrCnnParamFromPreview = new System.Windows.Forms.Button();
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add = new System.Windows.Forms.CheckBox();
-            this.progressBar_ScanFiles = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker_ScanFiles_Run = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage_PreviewParameter.SuspendLayout();
@@ -457,32 +458,32 @@
             // 
             // chart_PreviewParameter_Predict
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart_PreviewParameter_Predict.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart_PreviewParameter_Predict.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.chart_PreviewParameter_Predict.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_PreviewParameter_Predict.Legends.Add(legend1);
             this.chart_PreviewParameter_Predict.Location = new System.Drawing.Point(411, 447);
             this.chart_PreviewParameter_Predict.Name = "chart_PreviewParameter_Predict";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chart_PreviewParameter_Predict.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart_PreviewParameter_Predict.Series.Add(series1);
             this.chart_PreviewParameter_Predict.Size = new System.Drawing.Size(720, 200);
             this.chart_PreviewParameter_Predict.TabIndex = 26;
             this.chart_PreviewParameter_Predict.Text = "chart1";
             // 
             // chart_PreviewParameter_Train
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chart_PreviewParameter_Train.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart_PreviewParameter_Train.Legends.Add(legend6);
+            chartArea2.Name = "ChartArea1";
+            this.chart_PreviewParameter_Train.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart_PreviewParameter_Train.Legends.Add(legend2);
             this.chart_PreviewParameter_Train.Location = new System.Drawing.Point(411, 129);
             this.chart_PreviewParameter_Train.Name = "chart_PreviewParameter_Train";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chart_PreviewParameter_Train.Series.Add(series6);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart_PreviewParameter_Train.Series.Add(series2);
             this.chart_PreviewParameter_Train.Size = new System.Drawing.Size(720, 200);
             this.chart_PreviewParameter_Train.TabIndex = 26;
             this.chart_PreviewParameter_Train.Text = "chart1";
@@ -598,8 +599,11 @@
             // tabPage_ScanFiles
             // 
             this.tabPage_ScanFiles.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage_ScanFiles.Controls.Add(this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add);
+            this.tabPage_ScanFiles.Controls.Add(this.label_ScanFiles_Index);
             this.tabPage_ScanFiles.Controls.Add(this.progressBar_ScanFiles);
             this.tabPage_ScanFiles.Controls.Add(this.groupBox_ScanFiles_Parameters);
+            this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_GetSrCnnParamFromPreview);
             this.tabPage_ScanFiles.Controls.Add(this.groupBox1);
             this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_Run);
             this.tabPage_ScanFiles.Controls.Add(this.button_ScanFiles_PredictPrev);
@@ -625,12 +629,26 @@
             this.tabPage_ScanFiles.TabIndex = 0;
             this.tabPage_ScanFiles.Text = "ScanFiles";
             // 
+            // label_ScanFiles_Index
+            // 
+            this.label_ScanFiles_Index.AutoSize = true;
+            this.label_ScanFiles_Index.Location = new System.Drawing.Point(1078, 70);
+            this.label_ScanFiles_Index.Name = "label_ScanFiles_Index";
+            this.label_ScanFiles_Index.Size = new System.Drawing.Size(16, 15);
+            this.label_ScanFiles_Index.TabIndex = 50;
+            this.label_ScanFiles_Index.Text = "...";
+            // 
+            // progressBar_ScanFiles
+            // 
+            this.progressBar_ScanFiles.Location = new System.Drawing.Point(768, 62);
+            this.progressBar_ScanFiles.Name = "progressBar_ScanFiles";
+            this.progressBar_ScanFiles.Size = new System.Drawing.Size(304, 23);
+            this.progressBar_ScanFiles.TabIndex = 49;
+            // 
             // groupBox_ScanFiles_Parameters
             // 
-            this.groupBox_ScanFiles_Parameters.Controls.Add(this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add);
             this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_Sensitivity);
             this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_BatchSize);
-            this.groupBox_ScanFiles_Parameters.Controls.Add(this.button_ScanFiles_GetSrCnnParamFromPreview);
             this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_JudgementWindowSize);
             this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_WindowSize);
             this.groupBox_ScanFiles_Parameters.Controls.Add(this.groupBox_ScanFiles_Threshold);
@@ -641,6 +659,16 @@
             this.groupBox_ScanFiles_Parameters.TabIndex = 48;
             this.groupBox_ScanFiles_Parameters.TabStop = false;
             this.groupBox_ScanFiles_Parameters.Text = "SR-CNN Parameter";
+            // 
+            // checkBox_ScanFiles_GetSrCnnParamFromPreview_Add
+            // 
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.AutoSize = true;
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Location = new System.Drawing.Point(288, 93);
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Name = "checkBox_ScanFiles_GetSrCnnParamFromPreview_Add";
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Size = new System.Drawing.Size(52, 19);
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.TabIndex = 47;
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Text = "Add";
+            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.UseVisualStyleBackColor = true;
             // 
             // groupBox_ScanFiles_Sensitivity
             // 
@@ -659,6 +687,16 @@
             this.groupBox_ScanFiles_BatchSize.TabIndex = 30;
             this.groupBox_ScanFiles_BatchSize.TabStop = false;
             this.groupBox_ScanFiles_BatchSize.Text = "BatchSize";
+            // 
+            // button_ScanFiles_GetSrCnnParamFromPreview
+            // 
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Location = new System.Drawing.Point(118, 62);
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Name = "button_ScanFiles_GetSrCnnParamFromPreview";
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Size = new System.Drawing.Size(224, 30);
+            this.button_ScanFiles_GetSrCnnParamFromPreview.TabIndex = 46;
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Text = "GetParameterFromPreview";
+            this.button_ScanFiles_GetSrCnnParamFromPreview.UseVisualStyleBackColor = true;
+            this.button_ScanFiles_GetSrCnnParamFromPreview.Click += new System.EventHandler(this.button_ScanFiles_GetSrCnnParamFromPreview_Click);
             // 
             // groupBox_ScanFiles_JudgementWindowSize
             // 
@@ -807,16 +845,16 @@
             // 
             // chart_ScanFiles_Predict
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart_ScanFiles_Predict.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart_ScanFiles_Predict.Legends.Add(legend4);
+            chartArea3.Name = "ChartArea1";
+            this.chart_ScanFiles_Predict.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart_ScanFiles_Predict.Legends.Add(legend3);
             this.chart_ScanFiles_Predict.Location = new System.Drawing.Point(418, 135);
             this.chart_ScanFiles_Predict.Name = "chart_ScanFiles_Predict";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart_ScanFiles_Predict.Series.Add(series4);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart_ScanFiles_Predict.Series.Add(series3);
             this.chart_ScanFiles_Predict.Size = new System.Drawing.Size(720, 200);
             this.chart_ScanFiles_Predict.TabIndex = 38;
             this.chart_ScanFiles_Predict.Text = "chart1";
@@ -891,33 +929,6 @@
             this.tabPage_CreateDammyData.Text = "CreateDammyData";
             this.tabPage_CreateDammyData.UseVisualStyleBackColor = true;
             // 
-            // button_ScanFiles_GetSrCnnParamFromPreview
-            // 
-            this.button_ScanFiles_GetSrCnnParamFromPreview.Location = new System.Drawing.Point(91, 551);
-            this.button_ScanFiles_GetSrCnnParamFromPreview.Name = "button_ScanFiles_GetSrCnnParamFromPreview";
-            this.button_ScanFiles_GetSrCnnParamFromPreview.Size = new System.Drawing.Size(224, 23);
-            this.button_ScanFiles_GetSrCnnParamFromPreview.TabIndex = 46;
-            this.button_ScanFiles_GetSrCnnParamFromPreview.Text = "GetParameterFromPreview";
-            this.button_ScanFiles_GetSrCnnParamFromPreview.UseVisualStyleBackColor = true;
-            this.button_ScanFiles_GetSrCnnParamFromPreview.Click += new System.EventHandler(this.button_ScanFiles_GetSrCnnParamFromPreview_Click);
-            // 
-            // checkBox_ScanFiles_GetSrCnnParamFromPreview_Add
-            // 
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.AutoSize = true;
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Location = new System.Drawing.Point(15, 554);
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Name = "checkBox_ScanFiles_GetSrCnnParamFromPreview_Add";
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Size = new System.Drawing.Size(52, 19);
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.TabIndex = 47;
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.Text = "Add";
-            this.checkBox_ScanFiles_GetSrCnnParamFromPreview_Add.UseVisualStyleBackColor = true;
-            // 
-            // progressBar_ScanFiles
-            // 
-            this.progressBar_ScanFiles.Location = new System.Drawing.Point(817, 62);
-            this.progressBar_ScanFiles.Name = "progressBar_ScanFiles";
-            this.progressBar_ScanFiles.Size = new System.Drawing.Size(304, 23);
-            this.progressBar_ScanFiles.TabIndex = 49;
-            // 
             // backgroundWorker_ScanFiles_Run
             // 
             this.backgroundWorker_ScanFiles_Run.WorkerReportsProgress = true;
@@ -948,7 +959,6 @@
             this.tabPage_ScanFiles.ResumeLayout(false);
             this.tabPage_ScanFiles.PerformLayout();
             this.groupBox_ScanFiles_Parameters.ResumeLayout(false);
-            this.groupBox_ScanFiles_Parameters.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_ScanFiles_Predict)).EndInit();
@@ -1038,6 +1048,7 @@
         private System.Windows.Forms.CheckBox checkBox_ScanFiles_GetSrCnnParamFromPreview_Add;
         private System.Windows.Forms.ProgressBar progressBar_ScanFiles;
         private System.ComponentModel.BackgroundWorker backgroundWorker_ScanFiles_Run;
+        private System.Windows.Forms.Label label_ScanFiles_Index;
     }
 }
 
