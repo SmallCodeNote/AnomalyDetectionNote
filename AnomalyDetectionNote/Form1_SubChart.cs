@@ -338,6 +338,8 @@ namespace AnomalyDetectionNote
                 colList.Add(List_RawScore_StDev.ToString());
 
                 //List_Magnitude
+                if (List_Magnitude.Count == 0) { List_Magnitude = new List<double>(new double[] { 0, 0, 0 }); }
+
                 double List_Magnitude_Average = List_Magnitude.Average();
                 double List_Magnitude_StDev = StDev(List_Magnitude, List_Magnitude_Average);
                 colList.Add(List_Magnitude.Max().ToString());
